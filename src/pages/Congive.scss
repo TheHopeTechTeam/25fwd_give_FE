@@ -290,6 +290,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
             .exchange-rate {
                 display: flex;
                 flex-direction: row;
+                column-gap: 10px;
                 font-family: 'Gotham-Light', 'Roboto', sans-serif;
                 font-size: 14px;
                 font-weight: 400;
@@ -303,7 +304,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 
                 @media #{$mobile},
                 #{$tablet} {
-                    width: 200px;
+                    width: 400px;
                 }
 
                 .disclaimer {
@@ -819,4 +820,8 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 
 .m-r-3 {
     margin-right: 3px;
+
+    @media #{$mobile} {
+        width: 134px;
+    }
 }
