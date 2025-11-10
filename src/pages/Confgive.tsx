@@ -87,10 +87,15 @@ const CONFGive = () => {
         const isGooglePayConfigured = Boolean(googleMerchantId);
         const rawTapPayEnv = (import.meta.env.VITE_TAPPAY_ENV || '').toLowerCase();
         const tappayEnv: 'production' | 'sandbox' = rawTapPayEnv === 'sandbox' ? 'sandbox' : 'production';
+        const paymentApiUrl = import.meta.env.VITE_PAYMENT_API_URL || 'http://localhost:3000/api/payment';
 
         if (!tappayAppId || !tappayAppKey) {
             // Error handling
             console.error("Missing TapPay configuration in environment variables.");
+        }
+
+        if (!import.meta.env.VITE_PAYMENT_API_URL) {
+            console.warn(`VITE_PAYMENT_API_URL missing; falling back to ${paymentApiUrl}`);
         }
 
         TPDirect.setupSDK(
@@ -357,7 +362,9 @@ const CONFGive = () => {
     const postPay = (prime: string, last_four: string) => {
         setLoading(true);
         console.log("✅ 付款中");
-        fetch('https://confgive.thehope.app/api/payment', {
+        const paymentApiUrl = import.meta.env.VITE_PAYMENT_API_URL || 'https://confgive.thehope.app/api/payment';
+
+        fetch(paymentApiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
