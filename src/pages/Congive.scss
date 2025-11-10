@@ -73,10 +73,12 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 
     &.title-collapsed {
         background-image: none;
-        background-color: #227A85;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(7px);
+        -webkit-backdrop-filter: blur(7px);
 
         &::after {
-            background: #227A85;
+            background: rgba(255, 255, 255, 0.1);
         }
     }
 
