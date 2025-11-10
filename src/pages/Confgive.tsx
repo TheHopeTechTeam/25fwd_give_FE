@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { TextField, InputAdornment, Box, Checkbox, FormControlLabel, FormControl, FormHelperText } from "@mui/material";
 import CreditCard from "./CreditCard";
 import ExchangeRate from "./ExchangeRate";
@@ -65,6 +65,8 @@ const CONFGive = () => {
     });
     const [outputNote, setOutputNote] = useState('');
     const [privacyPolicyDialogOpen, setPrivacyPolicyDialogOpen] = useState(false);
+    const appleMerchantIdRef = useRef<string>(import.meta.env.VITE_APPLE_MERCHANT_ID || '');
+    const googleMerchantIdRef = useRef<string>(import.meta.env.VITE_GOOGLE_MERCHANT_ID || '');
 
     const handleFocus = () => {
         setIsFocused(true);
@@ -79,8 +81,10 @@ const CONFGive = () => {
 
         const tappayAppId = Number(import.meta.env.VITE_TAPPAY_APP_ID) || 0;
         const tappayAppKey = import.meta.env.VITE_TAPPAY_APP_KEY || '';
-        const appleMerchantId = import.meta.env.VITE_APPLE_MERCHANT_ID || '';
-        const googleMerchantId = import.meta.env.VITE_GOOGLE_MERCHANT_ID || '';
+        const appleMerchantId = appleMerchantIdRef.current;
+        const googleMerchantId = googleMerchantIdRef.current;
+        const isApplePayConfigured = Boolean(appleMerchantId);
+        const isGooglePayConfigured = Boolean(googleMerchantId);
 
         if (!tappayAppId || !tappayAppKey) {
             // Error handling
@@ -94,16 +98,26 @@ const CONFGive = () => {
         );
 
         TPDirect.paymentRequestApi.checkAvailability();
-        TPDirect.paymentRequestApi.setupApplePay({
-            merchantIdentifier: appleMerchantId,
-            countryCode: 'TW',
-        });
-        const googlePaySetting = {
-            googleMerchantId: googleMerchantId,
-            allowedCardAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-            merchantName: "The Hope",
+
+        if (isApplePayConfigured) {
+            TPDirect.paymentRequestApi.setupApplePay({
+                merchantIdentifier: appleMerchantId,
+                countryCode: 'TW',
+            });
+        } else {
+            console.warn("Apple Pay merchant identifier is missing. Apple Pay will be disabled until it is configured.");
         }
-        TPDirect.googlePay.setupGooglePay(googlePaySetting);
+
+        if (isGooglePayConfigured) {
+            const googlePaySetting = {
+                googleMerchantId: googleMerchantId,
+                allowedCardAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                merchantName: "The Hope",
+            }
+            TPDirect.googlePay.setupGooglePay(googlePaySetting);
+        } else {
+            console.warn("Google Pay merchant identifier is missing. Google Pay will be disabled until it is configured.");
+        }
         TPDirect.samsungPay.setup({
             country_code: 'tw'
         });
@@ -113,19 +127,18 @@ const CONFGive = () => {
         const iOS = /iphone|ipad|ipod/.test(ua);
         const samsung = /sm-|galaxy/.test(ua);
 
-        switch (true) {
-            case samsung:
-                setSelectedPayment(PAYMENT_TYPES.SAMSUNG_PAY);
-                break;
-            case iOS:
-                setSelectedPayment(PAYMENT_TYPES.APPLE_PAY);
-                break;
-            case android:
-                setSelectedPayment(PAYMENT_TYPES.GOOGLE_PAY);
-                break;
-            default:
-                setSelectedPayment(PAYMENT_TYPES.CREDIT_CARD);
-        };
+        let defaultPayment = PAYMENT_TYPES.CREDIT_CARD;
+
+        if (samsung) {
+            defaultPayment = PAYMENT_TYPES.SAMSUNG_PAY;
+        } else if (iOS && isApplePayConfigured) {
+            defaultPayment = PAYMENT_TYPES.APPLE_PAY;
+        } else if (android && isGooglePayConfigured) {
+            defaultPayment = PAYMENT_TYPES.GOOGLE_PAY;
+        }
+
+        setSelectedPayment(defaultPayment);
+        setValue('paymentType', defaultPayment, { shouldValidate: true });
     }, []);
 
     useEffect(() => {
@@ -199,6 +212,12 @@ const CONFGive = () => {
 
     // **設置 Apple Pay**
     const setupApplePay = async () => {
+
+        if (!appleMerchantIdRef.current) {
+            setIsApplePayReady(false);
+            handleOpenAlert("Apple Pay 尚未設定，請改用其他付款方式", "Apple Pay is not configured for this environment. Please choose another payment method.");
+            return;
+        }
 
         setIsApplePayReady(true);
 
