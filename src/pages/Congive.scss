@@ -1,6 +1,7 @@
 $pc: "(min-width: 1033px)";
 $tablet: "(max-width: 1032px)";
 $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
+$font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
 
@@ -12,6 +13,11 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
 @font-face {
     font-family: 'Gotham-Thin';
     src: url('/fonts/Gotham-Thin.woff2') format('woff2')
+}
+
+@font-face {
+    font-family: 'Gotham-Light';
+    src: url('/fonts/Gotham-Light.ttf') format('truetype');
 }
 
 @font-face {
@@ -100,6 +106,7 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
         margin: 0 auto;
         align-items: center;
         padding: 24px;
+        color: #FFFFFF;
 
         .form-block {
 
@@ -125,7 +132,7 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
 
                     &.Mui-error {
                         fieldset {
-                            border: 1px solid #E46962 !important; // 設定錯誤時的邊框顏色
+                            border: 1px solid #FF8982 !important; // 設定錯誤時的邊框顏色
                         }
                     }
 
@@ -190,10 +197,10 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
             .exchange-rate {
                 display: flex;
                 flex-direction: row;
-                font-family: 'Roboto';
+                font-family: 'Gotham-Light', 'Roboto', sans-serif;
                 font-size: 14px;
                 font-weight: 400;
-                color: #49454F;
+                color: #FFFFFF;
                 margin-bottom: 16px;
 
                 @media #{$pc},
@@ -209,6 +216,8 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
                 .disclaimer {
                     text-decoration: underline;
                     cursor: pointer;
+                    color: #FFFFFF;
+                    text-decoration-color: #FFFFFF;
                 }
             }
 
@@ -248,7 +257,7 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
                 }
 
                 .contact-information-note {
-                    color: rgba(40, 40, 41, 0.80);
+                    color: #FFFFFF;
                     font-family: 'Roboto';
                     font-size: 12px;
                     font-style: normal;
@@ -266,7 +275,7 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
 
                 .checkbox-custom {
                     padding: 0;
-                    color: rgba(40, 40, 41, 0.80);
+                    color: #FFFFFF;
 
                     &.Mui-checked {
                         color: #FFA01F;
@@ -302,13 +311,13 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
 
                 .label-chinese {
                     font-family: 'Roboto';
-                    color: #070707;
+                    color: #FFFFFF;
                     font-size: 18px;
                 }
 
                 .label-english {
                     font-family: 'Roboto';
-                    color: rgba(40, 40, 41, 0.80);
+                    color: #FFFFFF;
                     font-size: 16px;
                 }
 
@@ -355,7 +364,7 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
 
                     .valid-text {
                         white-space: pre-line;
-                        color: #E46962;
+                        color: #FF8982;
                         font-family: "Roboto";
                         font-size: 12px;
                         font-style: normal;
@@ -397,8 +406,8 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
                     }
 
                     .add-note-label {
-                        font-size: 'Roboto';
-                        color: rgba(0, 0, 0, 0.70);
+                        font-family: 'Roboto';
+                        color: #FFFFFF;
                         font-size: 14px;
                         font-style: normal;
                         font-weight: 500;
@@ -407,7 +416,7 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
                     }
 
                     .edit-note-label {
-                        color: rgba(0, 0, 0, 0.70);
+                        color: #FFFFFF;
                         text-align: center;
                         font-family: 'Roboto';
                         font-size: 14px;
@@ -427,10 +436,10 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
                         padding-left: 8px;
                     }
 
-                    .privacy-policy-note {
-                        margin-left: 5px;
-                        color: rgba(40, 40, 41, 0.80);
-                        font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+                .privacy-policy-note {
+                    margin-left: 5px;
+                    color: #FFFFFF;
+                    font-family: $font-zh;
                         font-size: 14px;
                         font-style: normal;
                         font-weight: 400;
@@ -439,9 +448,10 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
 
                         a {
                             font-weight: bold;
-                            font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+                            font-family: $font-zh;
                             text-decoration: underline;
-                            text-decoration-color: rgba(40, 40, 41, 0.80);
+                            color: #FFFFFF;
+                            text-decoration-color: #FFFFFF;
                         }
                     }
                 }
@@ -623,6 +633,10 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
     }
 }
 
+.privacy-dialog-title {
+    font-family: $font-zh;
+}
+
 .note {
 
     .MuiOutlinedInput-notchedOutline {
@@ -643,14 +657,14 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
 
     // error 時
     .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
-        border: 1px solid #E46962;
+        border: 1px solid #FF8982;
     }
 }
 
 .MuiFormControl-root {
     .MuiFormHelperText-root {
         white-space: pre-line;
-        color: #E46962 !important;
+        color: #FF8982 !important;
         margin-left: 0;
         font-family: 'Roboto';
         font-size: 14px;
@@ -668,6 +682,18 @@ $mobile: "(max-width: 599px)"; // 小於 600px 都視為 mobile
     font-weight: 400;
     line-height: 16px;
     margin-top: 6px;
+}
+
+.text-en {
+    font-family: inherit;
+}
+
+.text-zh {
+    font-family: $font-zh;
+}
+
+.font-gotham-light {
+    font-family: 'Gotham-Light', 'Roboto', sans-serif !important;
 }
 
 .width100 {

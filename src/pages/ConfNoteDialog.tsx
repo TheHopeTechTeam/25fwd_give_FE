@@ -1,9 +1,10 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from "@mui/material";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { ReactNode } from "react";
 
 interface AddNoteDialogProps {
     open: boolean;
-    title?: string;
+    title?: ReactNode;
     register: UseFormRegister<any>;
     errors: FieldErrors<any>;
     onClose: () => void;
@@ -16,7 +17,12 @@ interface AddNoteDialogProps {
 
 const ConfNoteDialog: React.FC<AddNoteDialogProps> = ({
     open,
-    title = "Add Note 新增備註",
+    title = (
+        <>
+            <span className="text-en font-gotham-light">Add Note</span>
+            <span className="text-zh"> 新增備註</span>
+        </>
+    ),
     onClose,
     onConfirm,
     cancelText = "CANCEL",
@@ -41,26 +47,26 @@ const ConfNoteDialog: React.FC<AddNoteDialogProps> = ({
                     helperText={typeof errors.note?.message === 'string' ? errors.note?.message : undefined} />
                 <p
                     className="note-alert"
-                    style={{ color: noteLength > 200 ? "#E46962" : "rgba(40, 40, 41, 0.80)" }}
+                    style={{ color: noteLength > 200 ? "#FF8982" : "rgba(40, 40, 41, 0.80)" }}
                 >
                     {noteLength > 200
                         ?
                         <>
-                            <p>Maximum character limit exceeded {noteLength}/200.</p>
-                            <p>已超過字數上限 {noteLength}/200。</p>
+                            <p className="text-en font-gotham-light">Maximum character limit exceeded {noteLength}/200.</p>
+                            <p className="text-zh">已超過字數上限 {noteLength}/200。</p>
                         </>
                         :
                         <>
-                            <p>Maximum character limit is 200.</p>
-                            <p>最多200字。</p>
+                            <p className="text-en font-gotham-light">Maximum character limit is 200.</p>
+                            <p className="text-zh">最多200字。</p>
                         </>}
                 </p>
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose} className="dialog-button">
+                <Button onClick={onClose} className="dialog-button font-gotham-light">
                     {cancelText}
                 </Button>
-                <Button onClick={onConfirm} className="dialog-button">
+                <Button onClick={onConfirm} className="dialog-button font-gotham-light">
                     {confirmText}
                 </Button>
             </DialogActions>

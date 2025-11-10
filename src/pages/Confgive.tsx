@@ -321,7 +321,7 @@ const CONFGive = () => {
                 console.log(result);
 
                 if (result.status !== 0) {
-                    document.body.style.backgroundColor = "#C4D9D4";
+                    document.body.style.backgroundColor = "#227A85";
                     document.querySelector(".wrapper")?.classList.add("successAndFailWrapper");
                     setGiveStatus("fail");
                     return;
@@ -540,7 +540,7 @@ const CONFGive = () => {
                                     />
                                 </Box>
                                 <Box className="contact-information">
-                                    <p className="contact-information-note">如要與教會奉獻數據整併，請填寫相同的聯絡資料</p>
+                                <p className="contact-information-note text-zh">如要與教會奉獻數據整併，請填寫相同的聯絡資料</p>
                                     <Receipt setReceiptType={setReceiptType}
                                         receiptType={receiptType}
                                         receipt={watch("receipt")}
@@ -564,12 +564,19 @@ const CONFGive = () => {
                                         {!outputNote ? (
                                             <>
                                                 <img className="add-icon" src="/images/add-icon.webp" alt="新增" />
-                                                <p className="add-note-label" >Add Note 新增備註</p>
+                                                <p className="add-note-label">
+                                                    <span className="text-en font-gotham-light">Add Note</span>
+                                                    <span className="text-zh"> 新增備註</span>
+                                                </p>
                                             </>
                                         ) : (
                                             <>
                                                 <img className="edit-icon" src="/images/edit-icon.webp" alt="編輯" />
-                                                <p className="edit-note-label" >Note 備註: {outputNote}</p>
+                                                <p className="edit-note-label">
+                                                    <span className="text-en font-gotham-light">Note</span>
+                                                    <span className="text-zh"> 備註</span>
+                                                    : {outputNote}
+                                                </p>
                                             </>
                                         )}
                                     </div>
@@ -583,7 +590,7 @@ const CONFGive = () => {
                                                     />
                                                 }
                                                 label={
-                                                    <p className="privacy-policy-note">
+                                                    <p className="privacy-policy-note text-zh">
                                                         點擊送出後即代表您已閱讀並同意「
                                                         <a
                                                             href="#"
@@ -618,14 +625,12 @@ const CONFGive = () => {
                 )}
                 <ConfAlertDialog
                     open={alertOpen}
-                    title="錯誤 Error"
                     message={message}
                     enMessage={enMessage}
                     onClose={handleCloseAlert}
                     cancelText="CLOSE"></ConfAlertDialog>
                 <ConfNoteDialog
                     open={addNoteDialogOpen}
-                    title="Add Note 新增備註"
                     register={register}
                     errors={errors}
                     onClose={handleCloseAddNote}
@@ -634,7 +639,7 @@ const CONFGive = () => {
                 ></ConfNoteDialog>
                 <ConfPrivacyPolicyDialog
                     open={privacyPolicyDialogOpen}
-                    title="The Hope 教會個人資料使用與隱私政策同意條款"
+                    title={<><span className="text-en">The Hope </span><span className="text-zh">教會個人資料使用與隱私政策同意條款</span></>}
                     cancelText="CLOSE"
                     onClose={handleClosePrivacyPolicy}
                 ></ConfPrivacyPolicyDialog>

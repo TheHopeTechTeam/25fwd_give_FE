@@ -1,8 +1,9 @@
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from "@mui/material";
+import { ReactNode } from "react";
 
 interface AlertDialogProps {
     open: boolean;
-    title?: string;
+    title?: ReactNode;
     message: string;
     enMessage: string;
     onClose: () => void;
@@ -14,7 +15,12 @@ interface AlertDialogProps {
 
 const ConfAlertDialog: React.FC<AlertDialogProps> = ({
     open,
-    title = "錯誤 Error",
+    title = (
+        <>
+            <span className="text-zh">錯誤</span>
+            <span className="text-en"> Error</span>
+        </>
+    ),
     message,
     onClose,
     enMessage,
@@ -24,7 +30,15 @@ const ConfAlertDialog: React.FC<AlertDialogProps> = ({
         <Dialog open={open} onClose={onClose}>
             <DialogTitle className="dialog-title">{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText className="dialog-message">{message}<br></br>{enMessage}</DialogContentText>
+                <DialogContentText className="dialog-message">
+                    {message && (
+                        enMessage
+                            ? <span className="text-zh">{message}</span>
+                            : <span className="text-en">{message}</span>
+                    )}
+                    {message && enMessage && <br></br>}
+                    {enMessage && <span className="text-en">{enMessage}</span>}
+                </DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose} className="dialog-button">

@@ -74,8 +74,8 @@ const Receipt: React.FC<ReceiptProps> = (props) => {
                         <Checkbox className="checkbox-custom" />
                     }
                     label={<div className="label-custom">
-                        <p className="label-chinese">需開立年度奉獻收據？</p>
-                        <p className="label-english">Annual giving receipt needed</p></div>}
+                        <p className="label-chinese text-zh">需開立年度奉獻收據？</p>
+                        <p className="label-english text-en font-gotham-light">Annual giving receipt needed</p></div>}
                     labelPlacement="end"
                 />
                 {receipt && (
@@ -87,9 +87,9 @@ const Receipt: React.FC<ReceiptProps> = (props) => {
                             <Button onClick={() => setReceiptType('company')} className={`personal-company-button ${receiptType === "company" ? "clicked" : "not-clicked"}`}>企業</Button>
                         </div>
                         {receiptType === "personal" && (
-                            <div>
-                                <p className="label-chinese">收據姓名</p>
-                                <p className="label-english">Receipt Name</p>
+                        <div>
+                            <p className="label-chinese text-zh">收據姓名</p>
+                        <p className="label-english text-en">Receipt Name</p>
                                 <TextField
                                     id="outlined-required"
                                     className="receiptName width100 basic-formControl"
@@ -99,7 +99,7 @@ const Receipt: React.FC<ReceiptProps> = (props) => {
                                     error={!!errors.receiptName}
                                     helperText={typeof errors.receiptName?.message === 'string' ? errors.receiptName?.message : undefined}
                                 />
-                                <p className="contact-information-note">如有報稅需求，請填寫與台灣身分證相符的姓名</p>
+                                <p className="contact-information-note text-zh">如有報稅需求，請填寫與台灣身分證相符的姓名</p>
                             </div>
                         )}
                     </>
@@ -110,8 +110,8 @@ const Receipt: React.FC<ReceiptProps> = (props) => {
                 receipt && receiptType === "company" && (
                     <div className="company-tax-block">
                         <div>
-                            <p className="label-chinese">企業登記全名</p>
-                            <p className="label-english">Company's Registered Name</p>
+                            <p className="label-chinese text-zh">企業登記全名</p>
+                            <p className="label-english text-en">Company's Registered Name</p>
                             <TextField
                                 id="outlined-required"
                                 className="receiptName width100 basic-formControl"
@@ -124,8 +124,8 @@ const Receipt: React.FC<ReceiptProps> = (props) => {
                             />
                         </div>
                         <div>
-                            <p className="label-chinese">統一編號</p>
-                            <p className="label-english">Tax ID Number</p>
+                            <p className="label-chinese text-zh">統一編號</p>
+                            <p className="label-english text-en">Tax ID Number</p>
                             <TextField
                                 id="outlined-required"
                                 className="m-t-8 width100 basic-formControl"

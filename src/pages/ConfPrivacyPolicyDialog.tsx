@@ -1,8 +1,9 @@
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from "@mui/material";
+import { ReactNode } from "react";
 
 interface ConfPrivacyPolicyDialogProps {
     open: boolean;
-    title?: string;
+    title?: ReactNode;
     onClose: () => void;
     cancelText?: string;
 }
@@ -16,9 +17,9 @@ const ConfPrivacyPolicy: React.FC<ConfPrivacyPolicyDialogProps> = ({
 }) => {
     return (
         <Dialog maxWidth="xs" fullWidth open={open} onClose={onClose}>
-            <DialogTitle className="privacy-dialog-title">{title}</DialogTitle>
+            <DialogTitle className="privacy-dialog-title text-zh">{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText className="dialog-message">
+                <DialogContentText className="dialog-message text-zh">
                     感謝您參與在 The Hope 教會當中！為確保您的個人資料安全並遵循《個人資料保護法》及相關法令規定，The Hope 教會將依法保護並妥善處理您的個人資料。請仔細閱讀以下條款，並確認您同意本教會對您的個人資料的蒐集、處理與利用方式。當您註冊為本系統會員或使用本系統所提供服務，將視為您同意本隱私政策及條款。如您不同意，請立刻停止使用本系統及相關服務：<br></br>
                     個人資料蒐集之目的及利用於適用法律允許的範圍內，The Hope 教會基於以下目的蒐集您的個人資料，且僅供The Hope 教會依照蒐集之目的進行處理和利用：<br></br>
                     1.1. 與教會相關的活動、事工及關懷服務之聯繫與通知。<br></br>

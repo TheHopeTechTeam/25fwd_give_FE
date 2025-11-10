@@ -22,8 +22,8 @@ const Upload: React.FC<UploadProps> = (props) => {
                         }
                         label={
                             <div className="label-custom">
-                                <p className="label-chinese">需上傳國稅局 (台灣報稅需要)</p>
-                                <p className="label-english">Need to submit taxes to Taiwan's IRS</p>
+                                <p className="label-chinese text-zh">需上傳國稅局 (台灣報稅需要)</p>
+                                <p className="label-english text-en font-gotham-light">Need to submit taxes to Taiwan's IRS</p>
                             </div>
                         }
                         labelPlacement="end"
@@ -31,8 +31,8 @@ const Upload: React.FC<UploadProps> = (props) => {
 
                     {upload && (
                         <div>
-                            <p className="label-chinese">身分證字號/居留證</p>
-                            <p className="label-english">National ID or ARC Number</p>
+                            <p className="label-chinese text-zh">身分證字號/居留證</p>
+                            <p className="label-english text-en">National ID or ARC Number</p>
                             <TextField
                                 id="outlined-required"
                                 className="m-t-8 width100 basic-formControl"

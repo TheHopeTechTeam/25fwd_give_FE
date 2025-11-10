@@ -44,7 +44,8 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
                 }}
             >
                 <p className="title-name">
-                    ’25 THE HOPE 特會
+                    <span className="text-en">’25 THE HOPE </span>
+                    <span className="text-zh">特會</span>
                 </p>
                 <p className="title-property">GIVING</p>
             </div>

@@ -5,7 +5,7 @@ const GiveSucessOrFail = ({ giveStatus }: { giveStatus: string }) => {
         <div className="success">
             {giveStatus === "fail" ? <img src="/images/fail.webp" alt="fail" /> : <img src="/images/success.webp" alt="success" />}
             <div>
-                <p className="success-title">{giveStatus === "fail" ? "奉獻失敗" : "奉獻完成"}</p>
+                <p className="success-title text-zh">{giveStatus === "fail" ? "奉獻失敗" : "奉獻完成"}</p>
                 <p className="success-title-english">{giveStatus === "fail" ? "FAILED" : "SUCCESS!"}</p>
             </div>
             <div>
@@ -62,7 +62,17 @@ const GiveSucessOrFail = ({ giveStatus }: { giveStatus: string }) => {
                         window.location.href = "https://thehope.co/24report";
                     };
                 }}>
-                {giveStatus === "fail" ? "TRY AGAIN 重試" : "BACK TO HOME 返回首頁"}
+                {giveStatus === "fail" ?
+                    <>
+                        <span className="text-en">TRY AGAIN</span>
+                        <span className="text-zh"> 重試</span>
+                    </>
+                    :
+                    <>
+                        <span className="text-en">BACK TO HOME</span>
+                        <span className="text-zh"> 返回首頁</span>
+                    </>
+                }
             </Button>
         </div>
     );

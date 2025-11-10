@@ -39,7 +39,7 @@ const CreditCard: React.FC<CreditCardProps> = (props) => {
                     'input': {
                         'font-size': '16px',
                         'color': '#070707',
-                        'font-family': `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif`,
+                        'font-family': "'Gotham-Light', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
                     }
                 }
             });
@@ -51,7 +51,7 @@ const CreditCard: React.FC<CreditCardProps> = (props) => {
             <div className="credit-card-block">
                 <div>
                     <p className="label-chinese">持卡人姓名</p>
-                    <p className="label-english">Card Holder Name</p>
+                    <p className="label-english font-gotham-light">Card Holder Name</p>
                     <TextField
                         {...register("name", {
                             required: paymentType === "credit-card" ? "Required 必填" : false,
@@ -67,20 +67,20 @@ const CreditCard: React.FC<CreditCardProps> = (props) => {
                 </div>
                 <div>
                     <p className="label-chinese">信用卡卡號</p>
-                    <p className="label-english">Card Number</p>
+                    <p className="label-english font-gotham-light">Card Number</p>
                     <div className="tpfield width100" style={!creditCardStatus.number ? { border: "none" } : { border: "1px solid red" }} id="card-number"></div>
                     <p className="valid-text">{creditCardStatus.number}</p>
                 </div>
                 <div className="credit-card-date-ccv-block">
                     <div>
                         <p className="label-chinese">有效日期</p>
-                        <p className="label-english">Expiration Date</p>
+                        <p className="label-english font-gotham-light">Expiration Date</p>
                         <div className="tpfield width100" style={!creditCardStatus.expiry ? { border: "none" } : { border: "1px solid red" }} id="card-expiration-date"></div>
                         <p className="valid-text">{creditCardStatus.expiry}</p>
                     </div>
                     <div>
                         <p className="label-chinese">末三碼</p>
-                        <p className="label-english">CCV</p>
+                        <p className="label-english font-gotham-light">CCV</p>
                         <div className="tpfield width100" style={!creditCardStatus.ccv ? { border: "none" } : { border: "1px solid red" }} id="card-ccv"></div>
                         <p className="valid-text">{creditCardStatus.ccv}</p>
                     </div>
