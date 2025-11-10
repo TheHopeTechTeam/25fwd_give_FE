@@ -13,8 +13,8 @@ const GiveSucessOrFail = ({ giveStatus }: { giveStatus: string }) => {
                     <>
                         <p className="note-chinese">
                             謝謝你的慷慨奉獻，與我們一起建造這個家！<br></br>
-                            我們注意到這筆奉獻「未成功授權」，請與您<br></br>
-                            的銀行/信用卡確認授權，或更換支付方式。<br></br>
+                            我們注意到這筆奉獻「未成功授權」，請與你<br></br>
+                            的發卡銀行確認授權，或更換支付方式。<br></br>
                             如有疑問請來信 <a href="mailto:give@thehope.co" onClick={(e) => {
                                 e.preventDefault();
                                 window.open("https://mail.google.com/mail/?view=cm&to=give@thehope.co", "_blank");
@@ -37,7 +37,7 @@ const GiveSucessOrFail = ({ giveStatus }: { giveStatus: string }) => {
                     <>
                         <p className="note-chinese">
                             謝謝你的慷慨奉獻，與我們一起建造這個家！<br></br>
-                            我們會在一週內將奉獻結果 email 到您的信<br></br>
+                            我們會在一週內將奉獻結果 email 到你的信<br></br>
                             箱。<br></br>
                             如有任何疑問，請來信 <a href="mailto:give@thehope.co">give@thehope.co</a>
                         </p>

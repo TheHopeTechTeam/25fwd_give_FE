@@ -48,8 +48,8 @@ const ExchangeRate = (amount: { value: number }) => {
         <div className="exchange-rate">
             {data &&
                 <>
-                    <p className="m-r-3 ">Equals {(amount.value * data?.rates?.USD).toFixed(2)} USD. </p>
-                    <p className="disclaimer" onClick={handleOpenAlert}>Disclaimer</p>
+                    <p className="m-r-3 font-gotham-light">Equals {(amount.value * data?.rates?.USD).toFixed(2)} USD. </p>
+                    <p className="disclaimer font-gotham-light" onClick={handleOpenAlert}>Disclaimer</p>
                 </>}
             <ConfAlertDialog
                 open={alertOpen}

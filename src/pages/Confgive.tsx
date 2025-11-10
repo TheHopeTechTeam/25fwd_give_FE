@@ -591,7 +591,7 @@ const CONFGive = () => {
                                                 }
                                                 label={
                                                     <p className="privacy-policy-note text-zh">
-                                                        點擊送出後即代表您已閱讀並同意「
+                                                        點擊送出後即代表你已閱讀並同意「
                                                         <a
                                                             href="#"
                                                             onClick={(e) => {

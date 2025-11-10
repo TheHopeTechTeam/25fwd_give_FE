@@ -71,26 +71,119 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         transition: background 0.3s ease-in-out;
     }
 
-    .title-block {
+    .title-deco {
         position: absolute;
-        bottom: 20px;
-        left: 20px;
+        width: 120px;
+        height: auto;
+        pointer-events: none;
         z-index: 1;
 
-        .title-name {
-            font-family: 'Gotham-Black';
-            font-size: 24px;
-            font-weight: bold;
-            line-height: normal;
-
+        &.title-deco-left {
+            top: 0;
+            left: 0;
+            transform-origin: top left;
         }
 
-        .title-property {
-            font-family: "Ade";
-            font-size: 64px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
+        &.title-deco-right {
+            bottom: 0;
+            right: 0;
+            transform-origin: bottom right;
+        }
+    }
+
+    .title-logo {
+        position: absolute;
+        height: auto;
+        left: 50%;
+        z-index: 2;
+
+        &.title-logo-floating {
+            top: 24px;
+            width: 120px;
+            transform: translate(-50%, 0);
+        }
+
+        &.title-logo-compact {
+            top: 50%;
+            width: 200px;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .title-copy-block {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+        width: calc(100% - 64px);
+        color: rgb(253, 241, 175);
+        z-index: 2;
+
+        .title-headline {
+            font-family: 'Gotham-Black';
+            font-size: 34px;
+            letter-spacing: 1px;
+        }
+
+        .title-subheadline {
+            font-size: 16px;
+            letter-spacing: 0.3px;
+        }
+
+    }
+
+    @media #{$mobile} {
+        .title-deco-left {
+            transform: scale(0.55);
+        }
+
+        .title-deco-right {
+            transform: scale(0.7);
+        }
+
+        .title-logo.title-logo-floating {
+            width: 100px;
+        }
+
+        .title-logo.title-logo-compact {
+            width: 160px;
+        }
+
+        .title-copy-block {
+            .title-headline {
+                font-size: 25px;
+            }
+
+            .title-subheadline {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .title-message {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 64px);
+        text-align: center;
+        color: rgb(253, 241, 175);
+        font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+        font-size: 20px;
+        letter-spacing: 0.3px;
+        line-height: 1.6;
+        z-index: 2;
+    }
+
+    @media #{$mobile} {
+        .title-message {
+            font-size: 16px;
+            bottom: 24px;
         }
     }
 }
@@ -359,7 +452,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
                     flex-direction: column;
                     gap: 32px;
                     border-radius: 8px;
-                    background: rgba(40, 40, 41, 0.10);
+                    background: rgba(255, 255, 255, 0.10);
                     padding: 16px;
 
                     .valid-text {

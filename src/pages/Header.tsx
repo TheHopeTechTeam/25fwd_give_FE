@@ -27,28 +27,44 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [setTitleHeight]);
 
+    const showFullBanner = giveStatus === "form" && titleHeight > 320;
+
     return (
         <div
             className="title"
             style={{
-                "--scroll-opacity": (giveStatus === "success" || giveStatus === "fail") ? "100" : scrollOpacity,
-                "position": (giveStatus === "success" || giveStatus === "fail") ? "relative" : "fixed",
+                "--scroll-opacity": showFullBanner ? scrollOpacity : "100",
+                position: (giveStatus === "success" || giveStatus === "fail") ? "relative" : "fixed",
                 height: (giveStatus === "success" || giveStatus === "fail") ? "124px" : `${titleHeight}px`,
             } as React.CSSProperties}
         >
-            <div
-                className="title-block"
-                style={{
-                    color: titleHeight < 536 || (giveStatus === "success" || giveStatus === "fail") ? "#F1D984" : "#FFF",
-                    bottom: titleHeight < 536 || (giveStatus === "success" || giveStatus === "fail") ? "10px" : "20px",
-                }}
-            >
-                <p className="title-name">
-                    <span className="text-en">’25 THE HOPE </span>
-                    <span className="text-zh">特會</span>
-                </p>
-                <p className="title-property">GIVING</p>
-            </div>
+            {showFullBanner && (
+                <>
+                    <img src="/images/deco-dots-left.png" alt="dots-deco" className="title-deco title-deco-left" />
+                    <img src="/images/deco-dots-right.png" alt="dots-deco" className="title-deco title-deco-right" />
+                </>
+            )}
+            <img
+                src="/images/Logo.png"
+                alt="FORWARD Restore"
+                className={`title-logo ${showFullBanner ? "title-logo-floating" : "title-logo-compact"}`}
+            />
+            {showFullBanner && (
+                <>
+                    <div className="title-copy-block">
+                        <p className="title-headline">FORWARD 外展建堂奉獻</p>
+                        <p className="title-subheadline font-gotham-light">
+                            建堂 ｜ 網路宣教 ｜ 其他城市分部
+                        </p>
+                        <p className="title-subheadline font-gotham-light">
+                            宣教資助 ｜ 外展憐憫事工
+                        </p>
+                    </div>
+                    <p className="title-message text-zh">
+                        在這個季節，讓我們一起感謝神的作為，並以信心期待神在未來要成就更大的事
+                    </p>
+                </>
+            )}
         </div>
     );
 };
