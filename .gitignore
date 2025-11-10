@@ -27,5 +27,4 @@ dist-ssr
 *.sw?
 
 # image files
-*.png
 banner-reference/
