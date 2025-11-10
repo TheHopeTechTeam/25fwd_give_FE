@@ -49,6 +49,7 @@ VITE_TAPPAY_APP_ID=        # numeric ID from TapPay console
 VITE_TAPPAY_APP_KEY=       # secret API key paired with the ID
 VITE_APPLE_MERCHANT_ID=    # Apple Pay merchant identifier (e.g., merchant.com.example)
 VITE_GOOGLE_MERCHANT_ID=   # Google Pay merchant ID
+VITE_TAPPAY_ENV=           # 'production' (default) or 'sandbox' for TPDirect.setupSDK
 ```
 These are consumed in `src/pages/Confgive.tsx` during TapPay setup. Missing values will log an error and payment widgets will not initialize.
 

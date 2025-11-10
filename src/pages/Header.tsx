@@ -28,12 +28,13 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
     }, [setTitleHeight]);
 
     const showFullBanner = giveStatus === "form" && titleHeight > 320;
+    const titleClasses = ["title", showFullBanner ? "" : "title-collapsed"].filter(Boolean).join(" ");
 
     return (
         <div
-            className="title"
+            className={titleClasses}
             style={{
-                "--scroll-opacity": showFullBanner ? scrollOpacity : "100",
+                "--scroll-opacity": showFullBanner ? scrollOpacity : "0",
                 position: (giveStatus === "success" || giveStatus === "fail") ? "relative" : "fixed",
                 height: (giveStatus === "success" || giveStatus === "fail") ? "124px" : `${titleHeight}px`,
             } as React.CSSProperties}

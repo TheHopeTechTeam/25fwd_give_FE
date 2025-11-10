@@ -85,6 +85,8 @@ const CONFGive = () => {
         const googleMerchantId = googleMerchantIdRef.current;
         const isApplePayConfigured = Boolean(appleMerchantId);
         const isGooglePayConfigured = Boolean(googleMerchantId);
+        const rawTapPayEnv = (import.meta.env.VITE_TAPPAY_ENV || '').toLowerCase();
+        const tappayEnv: 'production' | 'sandbox' = rawTapPayEnv === 'sandbox' ? 'sandbox' : 'production';
 
         if (!tappayAppId || !tappayAppKey) {
             // Error handling
@@ -94,7 +96,7 @@ const CONFGive = () => {
         TPDirect.setupSDK(
             tappayAppId,
             tappayAppKey,
-            'production', // or 'sandbox'
+            tappayEnv,
         );
 
         TPDirect.paymentRequestApi.checkAvailability();

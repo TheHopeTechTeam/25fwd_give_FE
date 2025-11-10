@@ -57,7 +57,7 @@ const GiveSucessOrFail = ({ giveStatus }: { giveStatus: string }) => {
                 className="continue-button width100"
                 onClick={() => {
                     if (giveStatus === "fail") {
-                        window.location.href = "/CONFGIVE";
+                        window.location.href = "/";
                     } else {
                         window.location.href = "https://thehope.co/24report";
                     };
