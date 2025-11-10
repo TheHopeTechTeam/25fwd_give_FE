@@ -26,7 +26,8 @@ export default defineConfig({
     port: 5173, // 可選，設定開發伺服器端口
     allowedHosts: [
       'localhost',
-      '127.0.0.1'
+      '127.0.0.1',
+      '25fwd.thehope.app'
     ]
   },
 })
