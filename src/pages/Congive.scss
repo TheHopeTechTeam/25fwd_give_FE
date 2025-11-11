@@ -44,6 +44,16 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
     background-size: cover;
     transition: background 0.3s ease-in-out;
     z-index: 100; // **確保它高於其他內容**
+    overflow: hidden;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow:
+        0 25px 60px rgba(7, 10, 28, 0.06),
+        inset 0 2px 8px rgba(255, 255, 255, 0.05),
+        inset 0 -10px 25px rgba(7, 10, 28, 0.049);
+    isolation: isolate;
+    background-clip: padding-box;
 
     // **根據螢幕大小切換背景圖片**
     @media #{$pc},
@@ -59,6 +69,19 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         background-image: url('/images/mobile-banner.webp');
     }
 
+    // 液態玻璃的暖色高光
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(120% 120% at 0% 20%, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0) 65%),
+            radial-gradient(90% 90% at 90% 0%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 0%);
+        pointer-events: none;
+        opacity: calc(var(--scroll-opacity, 0) * 0.65);
+        z-index: 0;
+    }
+
     // 白色遮罩 (會根據滾動改變透明度)
     &::after {
         content: "";
@@ -67,18 +90,29 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(76, 139, 146, var(--scroll-opacity));
+        background: rgba(255, 255, 255, var(--scroll-opacity));
         transition: background 0.3s ease-in-out;
+        pointer-events: none;
+        z-index: 1;
     }
 
     &.title-collapsed {
         background-image: none;
-        background-color: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(7px);
-        -webkit-backdrop-filter: blur(7px);
+        background-color: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border-color: rgba(255, 255, 255, 0.35);
+        box-shadow:
+            0 18px 40px rgba(7, 10, 28, 0.3),
+            inset 0 1px 6px rgba(255, 255, 255, 0.35),
+            inset 0 -8px 18px rgba(7, 10, 28, 0.08);
+
+        &::before {
+            opacity: 0.45;
+        }
 
         &::after {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
         }
     }
 
@@ -87,7 +121,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         width: 120px;
         height: auto;
         pointer-events: none;
-        z-index: 1;
+        z-index: 2;
 
         &.title-deco-left {
             top: 0;
@@ -106,7 +140,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         position: absolute;
         height: auto;
         left: 50%;
-        z-index: 2;
+        z-index: 3;
 
         &.title-logo-floating {
             top: 24px;
@@ -116,7 +150,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 
         &.title-logo-compact {
             top: 50%;
-            width: 200px;
+            width: 250px;
             transform: translate(-50%, -50%);
         }
     }
@@ -133,7 +167,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         gap: 12px;
         width: calc(100% - 64px);
         color: rgb(253, 241, 175);
-        z-index: 2;
+        z-index: 3;
 
         .title-headline {
             font-family: 'Gotham-Black';
@@ -188,7 +222,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         font-size: 20px;
         letter-spacing: 0.3px;
         line-height: 1.6;
-        z-index: 2;
+        z-index: 3;
     }
 
     @media #{$mobile} {
