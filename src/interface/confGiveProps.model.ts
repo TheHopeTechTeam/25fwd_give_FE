@@ -6,6 +6,7 @@ interface ConfGiveProps {
     name: string;
     upload: boolean;
     countryCode: string;
+    campus: string;
     receiptName: string;
     nationalid: string;
     company: string;

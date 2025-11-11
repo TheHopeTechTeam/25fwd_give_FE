@@ -41,7 +41,8 @@ const CONFGive = () => {
                 amount: 1000,
                 note: '',
                 upload: false,
-                countryCode: '886'
+                countryCode: '886',
+                campus: '台北分部'
             },
         }
     );
@@ -378,6 +379,7 @@ const CONFGive = () => {
                 receipt: requiresReceipt,
                 paymentType: normalizedPaymentType,
                 upload: Boolean(formValues.upload),
+                campus: formValues.campus || '',
                 receiptName: formValues.receiptName || '',
                 nationalid: formValues.nationalid || '',
                 company: formValues.company || '',

@@ -419,6 +419,12 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
                 flex-direction: column;
                 gap: 36px;
 
+                .branch-select-block {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                }
+
                 .receipt-name-block {
                     display: flex;
                     flex-direction: column;
@@ -918,6 +924,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 
 .text-en {
     font-family: inherit;
+    font-size: 13px !important;
 }
 
 .text-zh {

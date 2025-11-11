@@ -8,6 +8,8 @@ interface ReceiptProps {
     errors: FieldErrors<any>;
 }
 
+const BRANCH_OPTIONS = ["台北分部", "線上分部", "台中分部", "其他"];
+
 const Receipt: React.FC<ReceiptProps> = (props) => {
     const { register, errors, setReceiptType, receiptType } = props;
 
@@ -65,6 +67,20 @@ const Receipt: React.FC<ReceiptProps> = (props) => {
 
     return (
         <>
+            <div className="branch-select-block">
+                <p className="label-chinese text-zh">所屬分部</p>
+                <p className="label-english text-en">Campus</p>
+                <TextField
+                    select
+                    SelectProps={{ native: true }}
+                    className="branch-select width100 basic-formControl"
+                    {...register("campus")}
+                >
+                    {BRANCH_OPTIONS.map((option) => (
+                        <option key={option} value={option}>{option}</option>
+                    ))}
+                </TextField>
+            </div>
             <div className="receipt-name-block">
                 <div className="label-custom">
                     <p className="label-chinese text-zh">開立奉獻收據資訊</p>
