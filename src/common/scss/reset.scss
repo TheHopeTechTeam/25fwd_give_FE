@@ -30,6 +30,9 @@ body {
     text-rendering: optimizeLegibility;
     background-color: #227A85;
     color: #FFFFFF;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* 5. 移除超連結的預設樣式 */
@@ -60,6 +63,15 @@ p {
 html {
     font-size: 16px; // 設定根字體大小
     scroll-behavior: smooth; // 滑動行為平滑
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+#root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* 9. 表單元素一致化 */
