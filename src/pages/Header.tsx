@@ -40,7 +40,11 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
     const collapsedHeight = Math.max(TITLE_MIN_HEIGHT * COLLAPSED_HEIGHT_RATIO, titleHeight * COLLAPSED_HEIGHT_RATIO);
     const displayedHeight = isFormView ? (showFullBanner ? titleHeight : collapsedHeight) : 124;
     const collapsedWidthPercent = COLLAPSED_WIDTH_RATIO * 100;
-    const titleClasses = ["title", showFullBanner ? "" : "title-collapsed"].filter(Boolean).join(" ");
+    const titleClasses = [
+        "title",
+        showFullBanner ? "" : "title-collapsed",
+        isFormView ? "" : "title-dark"
+    ].filter(Boolean).join(" ");
 
     return (
         <div
@@ -50,9 +54,10 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
                 position: isFormView ? "fixed" : "relative",
                 height: isFormView ? `${displayedHeight}px` : "124px",
                 top: isCollapsed ? `${COLLAPSED_TOP_OFFSET}px` : 0,
-                width: isFormView ? (isCollapsed ? `${collapsedWidthPercent}%` : "100%") : "100%",
+                width: isFormView ? (isCollapsed ? `${collapsedWidthPercent}%` : "100%") : undefined,
                 left: isCollapsed ? "50%" : 0,
                 transform: isCollapsed ? "translateX(-50%)" : "none",
+                margin: isFormView ? 0 : "20px auto 0",
             } as React.CSSProperties}
         >
             {showFullBanner && (

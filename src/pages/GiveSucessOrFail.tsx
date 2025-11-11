@@ -56,7 +56,7 @@ const GiveSucessOrFail = ({ giveStatus }: { giveStatus: string }) => {
             </div>
             <Button
                 variant="contained"
-                className="continue-button width100"
+                className="continue-button glass-button glass-button-accent width100"
                 onClick={() => {
                     if (giveStatus === "fail") {
                         window.location.href = "/";
