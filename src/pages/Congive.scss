@@ -59,7 +59,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         background-image: url('/images/mobile-banner.webp');
     }
 
-    // 黑色遮罩 (會根據滾動改變透明度)
+    // 白色遮罩 (會根據滾動改變透明度)
     &::after {
         content: "";
         position: absolute;
@@ -67,7 +67,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, var(--scroll-opacity));
+        background: rgba(76, 139, 146, var(--scroll-opacity));
         transition: background 0.3s ease-in-out;
     }
 

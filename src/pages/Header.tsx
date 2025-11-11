@@ -19,7 +19,7 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
             setScrollOpacity(opacity);
 
             // 計算新的高度
-            const newHeight = Math.max(124, 536 - currentScrollY);
+            const newHeight = Math.max(186, 536 - currentScrollY);
             setTitleHeight(newHeight);
         };
 
