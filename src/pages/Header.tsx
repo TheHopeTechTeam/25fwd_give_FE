@@ -41,11 +41,12 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
         >
             {showFullBanner && (
                 <>
-                    <img src="/images/deco-dots-left.png" alt="dots-deco" className="title-deco title-deco-left" />
-                    <img src="/images/deco-dots-right.png" alt="dots-deco" className="title-deco title-deco-right" />
+                    <img loading="lazy" src="/images/deco-dots-left.png" alt="dots-deco" className="title-deco title-deco-left" />
+                    <img loading="lazy" src="/images/deco-dots-right.png" alt="dots-deco" className="title-deco title-deco-right" />
                 </>
             )}
             <img
+                loading="lazy"
                 src="/images/Logo.png"
                 alt="FORWARD Restore"
                 className={`title-logo ${showFullBanner ? "title-logo-floating" : "title-logo-compact"}`}

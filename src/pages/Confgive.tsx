@@ -331,8 +331,6 @@ const CONFGive = () => {
         const isRequired = (status: number) => status === 1;
         const valid = tappayStatus.status.number === 0 && tappayStatus.status.expiry === 0 && tappayStatus.status.ccv === 0;
 
-        console.log(tappayStatus);
-
 
         setCreditCardStatus({
             number: isRequired(tappayStatus.status.number) ? "Required 必填" : isInvalid(tappayStatus.status.number) ? "Invalid Card Number\n卡號無效" : "",
@@ -344,7 +342,6 @@ const CONFGive = () => {
 
         if (valid) {
             TPDirect.card.getPrime((result: any) => {
-                console.log(result);
 
                 if (result.status !== 0) {
                     document.body.style.backgroundColor = "#227A85";
@@ -363,6 +360,8 @@ const CONFGive = () => {
         setLoading(true);
         console.log("✅ 付款中");
         const paymentApiUrl = import.meta.env.VITE_PAYMENT_API_URL || 'https://25fwd.thehope.app/api/payment';
+        console.log("paymentApiUrl:" , paymentApiUrl);
+        
 
         fetch(paymentApiUrl, {
             method: 'POST',
@@ -591,7 +590,7 @@ const CONFGive = () => {
 
                                         {!outputNote ? (
                                             <>
-                                                <img className="add-icon" src="/images/add-icon.webp" alt="新增" />
+                                                <img loading="lazy" className="add-icon" src="/images/add-icon.webp" alt="新增" />
                                                 <p className="add-note-label">
                                                     <span className="text-en font-gotham-light">Add Note</span>
                                                     <span className="text-zh"> 新增備註</span>
@@ -599,7 +598,7 @@ const CONFGive = () => {
                                             </>
                                         ) : (
                                             <>
-                                                <img className="edit-icon" src="/images/edit-icon.webp" alt="編輯" />
+                                                <img loading="lazy" className="edit-icon" src="/images/edit-icon.webp" alt="編輯" />
                                                 <p className="edit-note-label">
                                                     <span className="text-en font-gotham-light">Note</span>
                                                     <span className="text-zh"> 備註</span>

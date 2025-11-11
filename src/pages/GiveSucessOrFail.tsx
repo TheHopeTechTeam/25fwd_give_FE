@@ -3,7 +3,9 @@ import { Button } from "@mui/material";
 const GiveSucessOrFail = ({ giveStatus }: { giveStatus: string }) => {
     return (
         <div className="success">
-            {giveStatus === "fail" ? <img src="/images/fail.webp" alt="fail" /> : <img src="/images/success.webp" alt="success" />}
+            {giveStatus === "fail"
+                ? <img loading="lazy" src="/images/fail.webp" alt="fail" />
+                : <img loading="lazy" src="/images/success.webp" alt="success" />}
             <div>
                 <p className="success-title text-zh">{giveStatus === "fail" ? "奉獻失敗" : "奉獻完成"}</p>
                 <p className="success-title-english">{giveStatus === "fail" ? "FAILED" : "SUCCESS!"}</p>
