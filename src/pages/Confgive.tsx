@@ -359,8 +359,7 @@ const CONFGive = () => {
     const postPay = (prime: string, last_four: string) => {
         setLoading(true);
         console.log("✅ 付款中");
-        const paymentApiUrl = import.meta.env.VITE_PAYMENT_API_URL || 'https://25fwd.thehope.app/api/payment';
-        console.log("paymentApiUrl:" , paymentApiUrl);
+        const paymentApiUrl = import.meta.env.VITE_PAYMENT_API_URL;
         
 
         fetch(paymentApiUrl, {
