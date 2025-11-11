@@ -534,10 +534,12 @@ const CONFGive = () => {
                                             input: {
                                                 readOnly: false,
                                                 startAdornment: <InputAdornment position="start">+</InputAdornment>,
-                                                autoComplete: "conf-phone-code",
+                                                autoComplete: "off",
+                                                inputMode: "numeric",
+                                                pattern: "[0-9]*",
                                             },
                                         }}
-                                        type="tel"
+                                        type="text"
                                         error={!!errors.phoneCode}
                                         helperText={errors.phoneCode?.message}
                                         className="phone-code basic-formControl"
@@ -552,7 +554,9 @@ const CONFGive = () => {
                                         })}
                                         slotProps={{
                                             input: {
-                                                autoComplete: "conf-phone-number",
+                                                autoComplete: "tel",
+                                                inputMode: "numeric",
+                                                pattern: "[0-9]*",
                                             },
                                         }}
                                         placeholder="Mobile Number"
