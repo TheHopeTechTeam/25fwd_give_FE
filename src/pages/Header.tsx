@@ -67,6 +67,8 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
                 left: isCollapsed ? "50%" : 0,
                 transform: isCollapsed ? "translateX(-50%)" : "none",
                 margin: 0,
+                borderTopLeftRadius: isFormView ? undefined : "32px",
+                borderTopRightRadius: isFormView ? undefined : "32px",
             } as React.CSSProperties}
         >
             {showFullBanner && (
@@ -94,6 +96,11 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
                             宣教資助 ｜ 外展憐憫事工
                         </p>
                     </div>
+                    {isFormView && (
+                        <p className="title-message text-zh">
+                            在這個季節，讓我們一起感謝神的作為，並以信心期待神在未來要成就更大的事
+                        </p>
+                    )}
                 </>
             )}
         </div>

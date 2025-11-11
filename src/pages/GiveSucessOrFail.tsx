@@ -39,15 +39,11 @@ const GiveSucessOrFail = ({ giveStatus }: { giveStatus: string }) => {
                     <>
                         <p className="note-chinese">
                             謝謝你的慷慨奉獻，與我們一起建造這個家！<br></br>
-                            我們會在一週內將奉獻結果 email 到你的信<br></br>
-                            箱。<br></br>
                             如有任何疑問，請來信 <a href="mailto:give@thehope.co">give@thehope.co</a>
                         </p>
                         <p className="note-english">
                             Thank you for your generosity in building this<br></br>
                             home with us!<br></br>
-                            We will email your giving record to you within a<br></br>
-                            week.<br></br>
                             If you have any questions, please feel free to <br></br>
                             contact us at <a href="mailto:give@thehope.co">give@thehope.co</a>
                         </p>
@@ -72,7 +68,7 @@ const GiveSucessOrFail = ({ giveStatus }: { giveStatus: string }) => {
                     :
                     <>
                         <span className="text-en">BACK TO HOME</span>
-                        <span className="text-zh"> 返回首頁</span>
+                        {/* <span className="text-zh"> 返回首頁</span> */}
                     </>
                 }
             </Button>

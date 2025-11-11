@@ -212,6 +212,21 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 
     }
 
+    .title-message {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 64px);
+        text-align: center;
+        color: rgb(253, 241, 175);
+        font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+        font-size: 20px;
+        letter-spacing: 0.3px;
+        line-height: 1.6;
+        z-index: 3;
+    }
+
     @media #{$mobile} {
         .title-deco-left {
             transform: scale(0.55);
@@ -237,6 +252,11 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
             .title-subheadline {
                 font-size: 16px;
             }
+        }
+
+        .title-message {
+            font-size: 16px;
+            bottom: 24px;
         }
     }
 
@@ -936,6 +956,8 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 .successAndFailWrapper {
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 0 10px;
 }
 
 .m-t-8 {
