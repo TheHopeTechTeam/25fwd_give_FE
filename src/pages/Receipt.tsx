@@ -1,16 +1,15 @@
-import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 interface ReceiptProps {
     setReceiptType: React.Dispatch<React.SetStateAction<string>>;
     receiptType: string;
-    receipt: boolean;
     register: UseFormRegister<any>;
     errors: FieldErrors<any>;
 }
 
 const Receipt: React.FC<ReceiptProps> = (props) => {
-    const { receipt, register, errors, setReceiptType, receiptType } = props;
+    const { register, errors, setReceiptType, receiptType } = props;
 
     // 統一編號的檢查碼驗證規則
     const taxIDNumberPattern = (value: any) => {
@@ -67,47 +66,35 @@ const Receipt: React.FC<ReceiptProps> = (props) => {
     return (
         <>
             <div className="receipt-name-block">
-                <FormControlLabel
-                    className="checkbox-label-block"
-                    {...register("receipt")}
-                    control={
-                        <Checkbox className="checkbox-custom" />
-                    }
-                    label={<div className="label-custom">
-                        <p className="label-chinese text-zh">需開立年度奉獻收據？</p>
-                        <p className="label-english text-en font-gotham-light">Annual giving receipt needed</p></div>}
-                    labelPlacement="end"
-                />
-                {receipt && (
-                    <>
-                        <div>
-                            <Button onClick={() => setReceiptType('personal')}
-                                className={`personal-company-button ${receiptType === "personal" ? "clicked" : "not-clicked"}`}
-                            >個人</Button>
-                            <Button onClick={() => setReceiptType('company')} className={`personal-company-button ${receiptType === "company" ? "clicked" : "not-clicked"}`}>企業</Button>
-                        </div>
-                        {receiptType === "personal" && (
-                        <div>
-                            <p className="label-chinese text-zh">收據姓名</p>
+                <div className="label-custom">
+                    <p className="label-chinese text-zh">開立年度奉獻收據資訊</p>
+                    <p className="label-english text-en font-gotham-light">Annual giving receipt information</p>
+                </div>
+                <div>
+                    <Button onClick={() => setReceiptType('personal')}
+                        className={`personal-company-button ${receiptType === "personal" ? "clicked" : "not-clicked"}`}
+                    >個人</Button>
+                    <Button onClick={() => setReceiptType('company')} className={`personal-company-button ${receiptType === "company" ? "clicked" : "not-clicked"}`}>企業</Button>
+                </div>
+                {receiptType === "personal" && (
+                    <div>
+                        <p className="label-chinese text-zh">收據姓名</p>
                         <p className="label-english text-en">Receipt Name</p>
-                                <TextField
-                                    id="outlined-required"
-                                    className="receiptName width100 basic-formControl"
-                                    {...register("receiptName", {
-                                        required: receiptType === "personal" ? "Required 必填" : false,
-                                    })}
-                                    error={!!errors.receiptName}
-                                    helperText={typeof errors.receiptName?.message === 'string' ? errors.receiptName?.message : undefined}
-                                />
-                                <p className="contact-information-note text-zh">如有報稅需求，請填寫與台灣身分證相符的姓名</p>
-                            </div>
-                        )}
-                    </>
-                )
-                }
+                        <TextField
+                            id="outlined-required"
+                            className="receiptName width100 basic-formControl"
+                            {...register("receiptName", {
+                                required: receiptType === "personal" ? "Required 必填" : false,
+                            })}
+                            error={!!errors.receiptName}
+                            helperText={typeof errors.receiptName?.message === 'string' ? errors.receiptName?.message : undefined}
+                        />
+                        <p className="contact-information-note text-zh">如有報稅需求，請填寫與台灣身分證相符的姓名</p>
+                    </div>
+                )}
             </div>
             {
-                receipt && receiptType === "company" && (
+                receiptType === "company" && (
                     <div className="company-tax-block">
                         <div>
                             <p className="label-chinese text-zh">企業登記全名</p>

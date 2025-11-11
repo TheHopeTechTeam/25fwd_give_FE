@@ -2,7 +2,6 @@ interface ConfGiveProps {
     amount: number;
     email: string;
     phone_number: string;
-    receipt: boolean;
     paymentType: string;
     name: string;
     upload: boolean;

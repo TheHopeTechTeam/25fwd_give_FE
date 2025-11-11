@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 
+export const TITLE_MAX_HEIGHT = 536;
+export const TITLE_MIN_HEIGHT = 186;
+export const TITLE_COLLAPSE_THRESHOLD = 320;
+export const COLLAPSED_HEIGHT_RATIO = 0.5;
+export const COLLAPSED_TOP_OFFSET = 25;
+export const COLLAPSED_WIDTH_RATIO = 0.5;
+
 interface HeaderProps {
     titleHeight: number;
     setTitleHeight: (height: number) => void;
@@ -19,7 +26,7 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
             setScrollOpacity(opacity);
 
             // 計算新的高度
-            const newHeight = Math.max(186, 536 - currentScrollY);
+            const newHeight = Math.max(TITLE_MIN_HEIGHT, TITLE_MAX_HEIGHT - currentScrollY);
             setTitleHeight(newHeight);
         };
 
@@ -27,7 +34,12 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [setTitleHeight]);
 
-    const showFullBanner = giveStatus === "form" && titleHeight > 320;
+    const isFormView = giveStatus === "form";
+    const showFullBanner = isFormView && titleHeight > TITLE_COLLAPSE_THRESHOLD;
+    const isCollapsed = isFormView && !showFullBanner;
+    const collapsedHeight = Math.max(TITLE_MIN_HEIGHT * COLLAPSED_HEIGHT_RATIO, titleHeight * COLLAPSED_HEIGHT_RATIO);
+    const displayedHeight = isFormView ? (showFullBanner ? titleHeight : collapsedHeight) : 124;
+    const collapsedWidthPercent = COLLAPSED_WIDTH_RATIO * 100;
     const titleClasses = ["title", showFullBanner ? "" : "title-collapsed"].filter(Boolean).join(" ");
 
     return (
@@ -35,8 +47,12 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
             className={titleClasses}
             style={{
                 "--scroll-opacity": showFullBanner ? scrollOpacity : "0",
-                position: (giveStatus === "success" || giveStatus === "fail") ? "relative" : "fixed",
-                height: (giveStatus === "success" || giveStatus === "fail") ? "124px" : `${titleHeight}px`,
+                position: isFormView ? "fixed" : "relative",
+                height: isFormView ? `${displayedHeight}px` : "124px",
+                top: isCollapsed ? `${COLLAPSED_TOP_OFFSET}px` : 0,
+                width: isFormView ? (isCollapsed ? `${collapsedWidthPercent}%` : "100%") : "100%",
+                left: isCollapsed ? "50%" : 0,
+                transform: isCollapsed ? "translateX(-50%)" : "none",
             } as React.CSSProperties}
         >
             {showFullBanner && (

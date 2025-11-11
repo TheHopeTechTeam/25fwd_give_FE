@@ -4,7 +4,7 @@ import CreditCard from "./CreditCard";
 import ExchangeRate from "./ExchangeRate";
 import { useForm, SubmitHandler } from "react-hook-form";
 import "./Congive.scss";
-import Header from "./Header";
+import Header, { COLLAPSED_HEIGHT_RATIO, COLLAPSED_TOP_OFFSET, TITLE_COLLAPSE_THRESHOLD, TITLE_MIN_HEIGHT } from "./Header";
 import GiveSucessOrFail from "./GiveSucessOrFail";
 import ConfAlertDialog from "./ConfAlertDialog";
 import PaymentSelect from "./PaymentSelect";
@@ -39,7 +39,6 @@ const CONFGive = () => {
             mode: "onChange", // 這裡設定為 onChange
             defaultValues: {
                 amount: 1000,
-                receipt: false,
                 note: '',
                 upload: false
             },
@@ -159,13 +158,6 @@ const CONFGive = () => {
             setValue("nationalid", "");
         }
     }, [receiptType, watch('upload')]);
-
-    useEffect(() => {
-        if (!watch('receipt')) {
-            setReceiptType('personal');
-        };
-    }, [watch('receipt')]);
-
 
     // 設置 Credit Card 欄位狀態
     const TPDirectCardOnUpdate = () => {
@@ -464,11 +456,17 @@ const CONFGive = () => {
         setPrivacyPolicyDialogOpen(false);
     }
 
+    const isFormView = giveStatus === "form";
+    const showFullBanner = isFormView && titleHeight > TITLE_COLLAPSE_THRESHOLD;
+    const collapsedHeight = Math.max(TITLE_MIN_HEIGHT * COLLAPSED_HEIGHT_RATIO, titleHeight * COLLAPSED_HEIGHT_RATIO);
+    const effectiveTitleHeight = isFormView ? (showFullBanner ? titleHeight : collapsedHeight) : 124;
+    const titleTopOffset = isFormView && !showFullBanner ? COLLAPSED_TOP_OFFSET : 0;
+
     return (
         <div>
             <Header titleHeight={titleHeight} setTitleHeight={setTitleHeight} giveStatus={giveStatus} ></Header>
             <div className="wrapper"
-                style={{ marginTop: giveStatus !== 'form' ? 0 : titleHeight > 124 ? `${titleHeight + scrollY}px` : "530px" }}>
+                style={{ marginTop: giveStatus !== 'form' ? 0 : effectiveTitleHeight > 124 ? `${effectiveTitleHeight + scrollY + titleTopOffset}px` : "530px" }}>
                 {(giveStatus === "success" || giveStatus === "fail") && (
                     <GiveSucessOrFail giveStatus={giveStatus}></GiveSucessOrFail>
                 )}
@@ -569,7 +567,6 @@ const CONFGive = () => {
                                 <p className="contact-information-note text-zh">如要與教會奉獻數據整併，請填寫相同的聯絡資料</p>
                                     <Receipt setReceiptType={setReceiptType}
                                         receiptType={receiptType}
-                                        receipt={watch("receipt")}
                                         register={register}
                                         errors={errors}></Receipt>
                                     <Upload receiptType={receiptType}
