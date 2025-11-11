@@ -40,7 +40,8 @@ const CONFGive = () => {
             defaultValues: {
                 amount: 1000,
                 note: '',
-                upload: false
+                upload: false,
+                countryCode: '886'
             },
         }
     );
@@ -471,7 +472,7 @@ const CONFGive = () => {
                     <GiveSucessOrFail giveStatus={giveStatus}></GiveSucessOrFail>
                 )}
                 {giveStatus === "form" && (
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                         <Box className="form">
                             <Box className="form-block">
                                 <TextField
@@ -521,12 +522,12 @@ const CONFGive = () => {
                                 />
                                 <Box className="phone-block">
                                     <TextField
-                                        {...register("phoneCode", {
+                                        {...register("countryCode", {
                                             required: "Required 必填",
                                             // 只能輸入數字
                                             validate: (value) => {
-                                                const phoneCodePattern = /^[0-9]{1,3}$/; // 最多3碼數字
-                                                return phoneCodePattern.test(value) || "IDP invalid\n無效的國碼";
+                                                const countryCodePattern = /^[0-9]{1,3}$/; // 最多3碼數字
+                                                return countryCodePattern.test(value) || "IDP invalid\n無效的國碼";
                                             }
                                         })}
                                         defaultValue="886"
@@ -534,14 +535,16 @@ const CONFGive = () => {
                                             input: {
                                                 readOnly: false,
                                                 startAdornment: <InputAdornment position="start">+</InputAdornment>,
-                                                autoComplete: "off",
-                                                inputMode: "numeric",
-                                                pattern: "[0-9]*",
+                                                inputProps: {
+                                                    autoComplete: "off",
+                                                    inputMode: "numeric",
+                                                    pattern: "[0-9]*",
+                                                },
                                             },
                                         }}
                                         type="text"
-                                        error={!!errors.phoneCode}
-                                        helperText={errors.phoneCode?.message}
+                                        error={!!errors.countryCode}
+                                        helperText={errors.countryCode?.message}
                                         className="phone-code basic-formControl"
                                     />
                                     <TextField
@@ -554,9 +557,11 @@ const CONFGive = () => {
                                         })}
                                         slotProps={{
                                             input: {
-                                                autoComplete: "tel",
-                                                inputMode: "numeric",
-                                                pattern: "[0-9]*",
+                                                inputProps: {
+                                                    autoComplete: "tel",
+                                                    inputMode: "numeric",
+                                                    pattern: "[0-9]*",
+                                                },
                                             },
                                         }}
                                         placeholder="Mobile Number"

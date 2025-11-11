@@ -5,7 +5,7 @@ interface ConfGiveProps {
     paymentType: string;
     name: string;
     upload: boolean;
-    phoneCode: string;
+    countryCode: string;
     receiptName: string;
     nationalid: string;
     company: string;
