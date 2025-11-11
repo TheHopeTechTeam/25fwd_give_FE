@@ -23,7 +23,7 @@ const Upload: React.FC<UploadProps> = (props) => {
                         label={
                             <div className="label-custom">
                                 <p className="label-chinese text-zh">需上傳國稅局 (台灣報稅需要)</p>
-                                <p className="label-english text-en font-gotham-light">Need to submit taxes to Taiwan's IRS</p>
+                                <p className="label-english text-en font-gotham-light">Upload record to Taiwan National Taxation Bureau</p>
                             </div>
                         }
                         labelPlacement="end"
