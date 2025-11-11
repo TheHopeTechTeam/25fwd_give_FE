@@ -67,8 +67,8 @@ const Receipt: React.FC<ReceiptProps> = (props) => {
         <>
             <div className="receipt-name-block">
                 <div className="label-custom">
-                    <p className="label-chinese text-zh">開立年度奉獻收據資訊</p>
-                    <p className="label-english text-en font-gotham-light">Annual giving receipt information</p>
+                    <p className="label-chinese text-zh">開立奉獻收據資訊</p>
+                    <p className="label-english text-en font-gotham-light">Information for Issuing Offering Receipts</p>
                 </div>
                 <div>
                     <Button
