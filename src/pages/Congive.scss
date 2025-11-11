@@ -399,7 +399,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
                 .contact-information-note {
                     color: #FFFFFF;
                     font-family: 'Roboto';
-                    font-size: 12px;
+                    font-size: 15px;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 20px;
@@ -456,32 +456,37 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
                 }
 
                 .label-english {
-                    font-family: 'Roboto';
+                    font-family: 'Gotham-Light';
                     color: #FFFFFF;
                     font-size: 16px;
                 }
 
                 .personal-company-button {
-                    border-radius: 999px;
                     text-align: center;
-                    font-family: 'Roboto';
+                    font-family: 'Gotham-Light';
                     font-size: 14px;
                     font-style: normal;
                     font-weight: 500;
                     line-height: 20px;
                     letter-spacing: 0.1px;
                     margin-right: 16px;
-                    width: 77px;
+                    width: 92px;
+                    color: #FFFFFF;
                 }
 
-                .clicked {
-                    background: #FFA01F;
+                .personal-company-button.clicked {
                     color: #070707;
+                    background: rgba(255, 255, 255, 0.9);
+                    border-color: rgba(255, 255, 255, 0.9);
+                    box-shadow:
+                        0 18px 40px rgba(255, 255, 255, 0.25),
+                        inset 0 2px 4px rgba(255, 255, 255, 0.6);
                 }
 
-                .not-clicked {
-                    color: #FFA01F;
-                    border: 1px solid #FFA01F;
+                .personal-company-button.not-clicked {
+                    color: #FFFFFF;
+                    border: 1px solid rgba(255, 255, 255, 0.45);
+                    background: rgba(255, 255, 255, 0.08);
                 }
 
                 .receiptName {
@@ -675,13 +680,46 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         }
     }
 
-    .continue-button {
+    .glass-button {
         border-radius: 999px;
         padding: 10px 24px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow:
+            0 15px 35px rgba(7, 10, 28, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            inset 0 -6px 12px rgba(7, 10, 28, 0.12);
+        color: #FFFFFF;
+        text-transform: none;
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-button:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .glass-button:disabled {
+        opacity: 0.6;
+    }
+
+    .glass-button-accent {
         color: #070707;
-        background-color: #FFA01F;
-        font-weight: 500;
-        box-shadow: none;
+        background: rgba(255, 160, 31, 0.9);
+        border-color: rgba(255, 160, 31, 0.7);
+        box-shadow:
+            0 18px 40px rgba(255, 160, 31, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.45),
+            inset 0 -8px 12px rgba(148, 71, 0, 0.25);
+    }
+
+    .glass-button-accent:hover {
+        background: rgba(255, 173, 64, 0.95);
+    }
+
+    .continue-button {
+        font-weight: 600;
     }
 
     .fake-pay-button {
@@ -739,6 +777,29 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
     .MuiPaper-root {
         width: 312px;
     }
+
+    .glass-button {
+        border-color: rgba(7, 10, 28, 0.12);
+        background: rgba(255, 255, 255, 0.65);
+        box-shadow:
+            0 12px 28px rgba(7, 10, 28, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.6),
+            inset 0 -4px 10px rgba(7, 10, 28, 0.12);
+        color: #070707;
+    }
+
+    .glass-button:hover {
+        background: rgba(255, 255, 255, 0.85);
+    }
+
+    .glass-button-accent {
+        background: rgba(255, 160, 31, 0.85);
+        border-color: rgba(255, 160, 31, 0.6);
+        box-shadow:
+            0 16px 32px rgba(255, 160, 31, 0.22),
+            inset 0 1px 0 rgba(255, 255, 255, 0.55),
+            inset 0 -5px 10px rgba(148, 71, 0, 0.32);
+    }
 }
 
 .MuiDialog-container {
@@ -766,11 +827,12 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
     }
 
     .dialog-button {
-        color: #FFA01F;
         font-family: 'Roboto';
-        font-size: var(--Label-Large-Size, 14px);
         font-size: 14px;
         font-weight: 500;
+        text-transform: none;
+        min-width: 120px;
+        justify-content: center;
     }
 }
 

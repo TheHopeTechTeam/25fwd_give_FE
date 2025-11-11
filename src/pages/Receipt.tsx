@@ -71,10 +71,14 @@ const Receipt: React.FC<ReceiptProps> = (props) => {
                     <p className="label-english text-en font-gotham-light">Annual giving receipt information</p>
                 </div>
                 <div>
-                    <Button onClick={() => setReceiptType('personal')}
-                        className={`personal-company-button ${receiptType === "personal" ? "clicked" : "not-clicked"}`}
+                    <Button
+                        onClick={() => setReceiptType('personal')}
+                        className={`personal-company-button glass-button ${receiptType === "personal" ? "clicked" : "not-clicked"}`}
                     >個人</Button>
-                    <Button onClick={() => setReceiptType('company')} className={`personal-company-button ${receiptType === "company" ? "clicked" : "not-clicked"}`}>企業</Button>
+                    <Button
+                        onClick={() => setReceiptType('company')}
+                        className={`personal-company-button glass-button ${receiptType === "company" ? "clicked" : "not-clicked"}`}
+                    >企業</Button>
                 </div>
                 {receiptType === "personal" && (
                     <div>

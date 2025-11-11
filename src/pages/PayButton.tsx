@@ -19,7 +19,7 @@ const PayButton: React.FC<PayButtonProps> = (props) => {
                 <Button
                     type="submit"
                     variant="contained"
-                    className="continue-button width100">
+                    className="continue-button glass-button glass-button-accent width100">
                     <span className="text-en">CONTINUE</span>
                     <span className="text-zh"> 下一步</span>
                 </Button>
