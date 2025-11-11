@@ -349,26 +349,68 @@ const CONFGive = () => {
     }
 
     // **傳送至後端 API**
-    const postPay = (prime: string, last_four: string) => {
+    const postPay = (prime: string, _lastFour: string) => {
         setLoading(true);
         console.log("✅ 付款中");
         const paymentApiUrl = import.meta.env.VITE_PAYMENT_API_URL;
-        
+
+        if (!paymentApiUrl) {
+            console.error("❌ 錯誤：未設定 VITE_PAYMENT_API_URL，無法傳送付款請求。");
+            setError();
+            return;
+        }
+
+        const formValues = getValues();
+        const sanitizedCountryCode = (formValues.countryCode || '').toString().replace(/^[+ ]+/, '');
+        const phoneCode = sanitizedCountryCode ? `+${sanitizedCountryCode}` : '+886';
+        const normalizedPaymentType = (formValues.paymentType || PAYMENT_TYPES.CREDIT_CARD).replace(/-/g, '_');
+
+        const requiresReceipt = receiptType === RECEIPT_TYPES.PERSONAL || receiptType === RECEIPT_TYPES.COMPANY;
+
+        const payload = {
+            prime: prime,
+            amount: Number(formValues.amount ?? watch('amount')),
+            cardholder: {
+                name: formValues.name ? formValues.name : "未填寫",
+                email: formValues.email,
+                phoneCode,
+                phone_number: formValues.phone_number,
+                receipt: requiresReceipt,
+                paymentType: normalizedPaymentType,
+                upload: Boolean(formValues.upload),
+                receiptName: formValues.receiptName || '',
+                nationalid: formValues.nationalid || '',
+                company: formValues.company || '',
+                taxid: formValues.taxid || '',
+                note: formValues.note || '',
+            }
+        };
+
+        console.log("📤 傳送至後端的資料：", payload);
 
         fetch(paymentApiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                prime: prime,
-                amount: Number(watch('amount')),
-                cardholder: {
-                    ...getValues(),
-                    last_four,
-                    name: getValues().name ? getValues().name : "未填寫",
-                }
-            }),
+            body: JSON.stringify(payload),
         })
-            .then((res) => res.json())
+            .then(async (response) => {
+                const contentType = response.headers.get('content-type') ?? '';
+                const responseText = await response.text();
+
+                if (!response.ok) {
+                    throw new Error(`Payment API responded with status ${response.status}`);
+                }
+
+                if (!contentType.includes('application/json')) {
+                    throw new Error(`Unexpected response format: ${responseText.slice(0, 100)}`);
+                }
+
+                try {
+                    return JSON.parse(responseText);
+                } catch (error) {
+                    throw new Error('Payment API returned invalid JSON.');
+                }
+            })
             .then((res) => {
                 console.log("✅ 付款成功");
                 if (res.status === 0) {
