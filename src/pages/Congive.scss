@@ -35,6 +35,24 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
     src: url('/fonts/Noto-Sans.woff2') format('woff2')
 }
 
+@media #{$mobile} {
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+  
+    body {
+      padding-top: env(safe-area-inset-top);
+    }
+}
+
+@media #{$mobile} {
+    .title {
+      padding-top: env(safe-area-inset-top);
+    }
+  }
+  
+  
 .title {
     top: 0;
     left: 0;
@@ -67,15 +85,6 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 
     @media #{$mobile} {
         background-image: url('/images/mobile-banner.webp');
-        html, body {
-            background: #0d173c; // 自己想要的底色
-            margin: 0;
-            padding: 0;
-        }
-    
-        body {
-            padding-top: env(safe-area-inset-top);
-        }
     }
 
     // 液態玻璃的暖色高光
