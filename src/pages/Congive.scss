@@ -44,10 +44,10 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 }
 
 @media #{$mobile} {
-    body, #root {
+    html, body {
         margin: 0;
         padding: 0;
-        height: 100%;
+        min-height: 100%;
         overflow: auto;
       }  
       
@@ -57,7 +57,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
       }
       
       .title {
-        position: absolute;
+        position: sticky;
         top: env(safe-area-inset-top);
         left: 0;
         right: 0;
