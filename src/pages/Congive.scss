@@ -34,17 +34,6 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
     font-family: 'Noto Sans';
     src: url('/fonts/Noto-Sans.woff2') format('woff2')
 }
-@media #{$mobile} {
-    // .title {
-    //   position: sticky;
-    //   top: 0;
-    //   padding-top: env(safe-area-inset-top);
-    //   padding-top: constant(safe-area-inset-top);
-    //   backdrop-filter: blur(20px);
-    //   background: rgba(0,0,0,0.3);
-    //   border-radius: 0;        // 半透明必須配合不要露縫
-    // }
-  }
 
 @media #{$mobile} {
     html, body {
@@ -55,9 +44,25 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 }
 
 @media #{$mobile} {
-    #root {
-      padding-top: env(safe-area-inset-top);
-    }
+    body, #root {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: auto;
+      }  
+      
+      #root {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      
+      .title {
+        position: absolute;
+        top: env(safe-area-inset-top);
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
   }
   
   
