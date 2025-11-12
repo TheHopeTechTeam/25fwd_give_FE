@@ -511,7 +511,7 @@ const CONFGive = () => {
         <div>
             <Header titleHeight={titleHeight} setTitleHeight={setTitleHeight} giveStatus={giveStatus} ></Header>
             <div className="wrapper"
-                style={{ marginTop: giveStatus !== 'form' ? 0 : effectiveTitleHeight > 124 ? `${effectiveTitleHeight + scrollY + titleTopOffset}px` : "530px" }}>
+                style={{ marginTop: giveStatus !== 'form' ? 0 : effectiveTitleHeight > 124 ? `${effectiveTitleHeight + scrollY + titleTopOffset}px` : "436.75px" }}>
                 {(giveStatus === "success" || giveStatus === "fail") && (
                     <GiveSucessOrFail giveStatus={giveStatus}></GiveSucessOrFail>
                 )}
