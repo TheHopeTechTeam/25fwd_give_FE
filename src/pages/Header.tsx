@@ -4,7 +4,7 @@ export const TITLE_MAX_HEIGHT = 536;
 export const TITLE_MIN_HEIGHT = 186;
 export const TITLE_COLLAPSE_THRESHOLD = 320;
 export const COLLAPSED_HEIGHT_RATIO = 0.5;
-export const COLLAPSED_TOP_OFFSET = 25;
+export const COLLAPSED_TOP_OFFSET = 60;
 export const COLLAPSED_WIDTH_RATIO = 0.5;
 const RESULT_VIEW_HEIGHT_RATIO = 0.4;
 

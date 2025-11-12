@@ -67,6 +67,15 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 
     @media #{$mobile} {
         background-image: url('/images/mobile-banner.webp');
+        html, body {
+            background: #0d173c; // 自己想要的底色
+            margin: 0;
+            padding: 0;
+        }
+    
+        body {
+            padding-top: env(safe-area-inset-top);
+        }
     }
 
     // 液態玻璃的暖色高光
@@ -173,7 +182,7 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         z-index: 3;
 
         &.title-logo-floating {
-            top: 24px;
+            top: 60px;
             width: 120px;
             transform: translate(-50%, 0);
         }
