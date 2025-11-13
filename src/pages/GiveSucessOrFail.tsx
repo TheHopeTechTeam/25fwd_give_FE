@@ -26,7 +26,7 @@ const GiveSucessOrFail = ({ giveStatus }: { giveStatus: string }) => {
                             Thank you for your generosity in building this<br></br>
                             home with us!<br></br>
                             Your transaction was not authorized. Please<br></br>
-                            check with your bank/credit card or try another<br></br>
+                            check with your bank/Credit Card 信用卡 or try another<br></br>
                             payment method.<br></br>
                             For further support, please contact us at <br></br>
                             <a href="mailto:give@thehope.co" onClick={(e) => {

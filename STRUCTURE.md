@@ -3,7 +3,7 @@
 ## What This Repo Is
 - React 19 + TypeScript single-page flow scaffolded by Vite 6, focused on the `/CONFGIVE` donation form.
 - Styling combines MUI components with a global SCSS reset (`src/common/scss/reset.scss`) and page-specific styles (`src/pages/Congive.scss`).
-- Form state, validation, and submission logic live in `src/pages/Confgive.tsx`, which wires TapPay (via the global `TPDirect`) together with Apple/Google/Samsung Pay helpers and the credit-card fields.
+- Form state, validation, and submission logic live in `src/pages/Confgive.tsx`, which wires TapPay (via the global `TPDirect`) together with Apple/Google Pay helpers and the credit-card fields.
 - Routing is intentionally minimal: `/CONFGIVE` renders the donation experience, all other routes immediately redirect to `https://thehope.co/en/privacyterms`.
 
 ## Tech Stack & Tooling
@@ -35,7 +35,7 @@ root/
 - `src/main.tsx`: boots the React app, imports the global reset styles, and renders `<AppRouter />`.
 - `src/Router.tsx`: defines the only route (`/CONFGIVE`) and redirects everything else to the external privacy terms; handy place to add future routes.
 - `src/pages/Confgive.tsx`:
-  - Initializes TapPay (`TPDirect.setupSDK`) from env vars and configures Apple/Google/Samsung Pay helpers on mount.
+  - Initializes TapPay (`TPDirect.setupSDK`) from env vars and configures Apple/Google Pay helpers on mount.
   - Uses `react-hook-form` with `ConfGiveProps` to manage fields such as amount, receipt info, attachments, and payment selection.
   - Chooses a default payment type based on user agent, keeps track of payment readiness states, and conditionally enables Pay buttons.
   - Delegates UI to child components: `CreditCard`, `ExchangeRate`, `PaymentSelect`, `Receipt`, `Upload`, `PayButton`, plus dialogs for alerts, notes, privacy policy, and success/failure states.
