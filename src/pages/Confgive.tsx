@@ -23,7 +23,6 @@ declare global {
 const PAYMENT_TYPES = {
     APPLE_PAY: "apple-pay",
     GOOGLE_PAY: "google-pay",
-    SAMSUNG_PAY: "samsung-pay",
     CREDIT_CARD: "credit-card",
 };
 
@@ -54,7 +53,6 @@ const CONFGive = () => {
     const [giveStatus, setGiveStatus] = useState("form");
     const [isApplePayReady, setIsApplePayReady] = useState(false);
     const [isGooglePayReady, setIsGooglePayReady] = useState(false);
-    const [isSamsungPayReady, setIsSamsungPayReady] = useState(false);
     const [loading, setLoading] = useState(false);
     const [receiptType, setReceiptType] = useState<string>(RECEIPT_TYPES.PERSONAL);
     const [isFocused, setIsFocused] = useState(false);
@@ -126,20 +124,13 @@ const CONFGive = () => {
         } else {
             console.warn("Google Pay merchant identifier is missing. Google Pay will be disabled until it is configured.");
         }
-        TPDirect.samsungPay.setup({
-            country_code: 'tw'
-        });
-
         const ua = navigator.userAgent.toLowerCase();
         const android = ua.includes("android");
         const iOS = /iphone|ipad|ipod/.test(ua);
-        const samsung = /sm-|galaxy/.test(ua);
 
         let defaultPayment = PAYMENT_TYPES.CREDIT_CARD;
 
-        if (samsung) {
-            defaultPayment = PAYMENT_TYPES.SAMSUNG_PAY;
-        } else if (iOS && isApplePayConfigured) {
+        if (iOS && isApplePayConfigured) {
             defaultPayment = PAYMENT_TYPES.APPLE_PAY;
         } else if (android && isGooglePayConfigured) {
             defaultPayment = PAYMENT_TYPES.GOOGLE_PAY;
@@ -161,7 +152,7 @@ const CONFGive = () => {
         }
     }, [receiptType, watch('upload')]);
 
-    // 設置 Credit Card 欄位狀態
+    // 設置 Credit Card 信用卡 欄位狀態
     const TPDirectCardOnUpdate = () => {
         TPDirect.card.onUpdate((update: any) => {
             // 檢查欄位是否無效
@@ -180,7 +171,6 @@ const CONFGive = () => {
         if (!isValid) {
             setIsGooglePayReady(false);
             setIsApplePayReady(false);
-            setIsSamsungPayReady(false);
             return;
         }
 
@@ -190,9 +180,6 @@ const CONFGive = () => {
                 break;
             case PAYMENT_TYPES.GOOGLE_PAY:
                 setIsGooglePayReady(true);
-                break;
-            case PAYMENT_TYPES.SAMSUNG_PAY:
-                setIsSamsungPayReady(true);
                 break;
             default:
                 // 沒有 default 好像怪怪的，但想不到可以放什麼 lol
@@ -289,33 +276,7 @@ const CONFGive = () => {
 
 
 
-    // **設置 Samsung Pay**
-    const setupSamSungPay = () => {
-        setIsSamsungPayReady(true);
-        const paymentRequest = {
-            supportedNetworks: ['MASTERCARD', 'VISA'],
-            total: {
-                label: 'The Hope',
-                amount: {
-                    currency: 'TWD',
-                    value: getValues("amount").toString() // 直接獲取最新值
-                }
-            }
-        };
-
-        TPDirect.samsungPay.setupPaymentRequest(paymentRequest)
-        TPDirect.samsungPay.getPrime(function (result: any) {
-            if (result.status !== 0) {
-                handleOpenAlert("此裝置不支援 Samsung Pay", "This device does not support Samsung Pay");
-                return;
-            };
-
-            postPay(result.prime, result.card.lastfour);
-        });
-    }
-
-
-    // **設置 信用卡**
+    // **設置 Credit Card 信用卡**
     const setupCreditCard = () => {
         // 檢查各個欄位的狀態
         const tappayStatus = TPDirect.card.getTappayFieldsStatus();
@@ -690,10 +651,8 @@ const CONFGive = () => {
                                     <PayButton paymentType={watch('paymentType')}
                                         setupGooglePay={setupGooglePay}
                                         setupApplePay={setupApplePay}
-                                        setupSamsungPay={setupSamSungPay}
                                         isApplePayReady={isApplePayReady}
-                                        isGooglePayReady={isGooglePayReady}
-                                        isSamsungPayReady={isSamsungPayReady}></PayButton>
+                                        isGooglePayReady={isGooglePayReady}></PayButton>
                                 </Box>
                             </Box>
                         </Box>

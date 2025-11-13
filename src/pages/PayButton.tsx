@@ -4,14 +4,12 @@ interface PayButtonProps {
     paymentType: string;
     isApplePayReady: boolean;
     isGooglePayReady: boolean;
-    isSamsungPayReady: boolean;
     setupGooglePay: () => void;
     setupApplePay: () => void;
-    setupSamsungPay: () => void;
 }
 
 const PayButton: React.FC<PayButtonProps> = (props) => {
-    const { paymentType, isApplePayReady, isGooglePayReady, isSamsungPayReady, setupGooglePay, setupApplePay, setupSamsungPay } = props;
+    const { paymentType, isApplePayReady, isGooglePayReady, setupGooglePay, setupApplePay } = props;
 
     return (
         <>
@@ -46,22 +44,6 @@ const PayButton: React.FC<PayButtonProps> = (props) => {
                         <button
                             type="submit"
                             className="fake-pay-button google-pay-button"
-                        ></button>
-                    )}
-                </>
-            )}
-            {paymentType === "samsung-pay" && (
-                <>
-                    {isSamsungPayReady ? (
-                        <button
-                            type="button"
-                            className="fake-pay-button samsung-pay-button"
-                            onClick={setupSamsungPay}
-                        ></button>
-                    ) : (
-                        <button
-                            type="submit"
-                            className="fake-pay-button samsung-pay-button"
                         ></button>
                     )}
                 </>
