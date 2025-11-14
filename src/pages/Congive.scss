@@ -70,6 +70,8 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
     top: 0;
     left: 0;
     width: 100%;
+    padding-top: constant(safe-area-inset-top, 0px);
+    padding-top: env(safe-area-inset-top, 0px);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -557,8 +559,9 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
                     line-height: 20px;
                     letter-spacing: 0.1px;
                     margin-right: 16px;
-                    width: 92px;
+                    width: 80px;
                     color: #FFFFFF;
+                    border-radius: 16px;
                 }
 
                 .personal-company-button.clicked {

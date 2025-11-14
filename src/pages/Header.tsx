@@ -54,12 +54,10 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
         "title",
         isCollapsed ? "title-collapsed" : ""
     ].filter(Boolean).join(" ");
-
-    // Respect iOS safe-area when the header is fixed on mobile Safari
     const safeAreaTop = "env(safe-area-inset-top, 0px)";
     const topOffset = isFormView
-        ? (isCollapsed ? `calc(${safeAreaTop} + ${COLLAPSED_TOP_OFFSET}px)` : safeAreaTop)
-        : 0;
+        ? (isCollapsed ? `calc(${safeAreaTop} + ${COLLAPSED_TOP_OFFSET}px)` : "0px")
+        : "0px";
 
     return (
         <div

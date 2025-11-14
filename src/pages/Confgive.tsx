@@ -468,11 +468,21 @@ const CONFGive = () => {
     const effectiveTitleHeight = isFormView ? (showFullBanner ? titleHeight : collapsedHeight) : 124;
     const titleTopOffset = isFormView && !showFullBanner ? COLLAPSED_TOP_OFFSET : 0;
 
+    const safeAreaTopInset = "env(safe-area-inset-top, 0px)";
+    const wrapperMarginBase = giveStatus !== "form"
+        ? 0
+        : (effectiveTitleHeight > 124
+            ? (effectiveTitleHeight + scrollY + titleTopOffset)
+            : 436.75);
+    const wrapperMarginTop = giveStatus !== "form"
+        ? 0
+        : `calc(${wrapperMarginBase}px + ${safeAreaTopInset})`;
+
     return (
         <div>
             <Header titleHeight={titleHeight} setTitleHeight={setTitleHeight} giveStatus={giveStatus} ></Header>
             <div className="wrapper"
-                style={{ marginTop: giveStatus !== 'form' ? 0 : effectiveTitleHeight > 124 ? `${effectiveTitleHeight + scrollY + titleTopOffset}px` : "436.75px" }}>
+                style={{ marginTop: wrapperMarginTop }}>
                 {(giveStatus === "success" || giveStatus === "fail") && (
                     <GiveSucessOrFail giveStatus={giveStatus}></GiveSucessOrFail>
                 )}
