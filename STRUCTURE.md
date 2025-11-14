@@ -49,6 +49,7 @@ VITE_TAPPAY_APP_ID=        # numeric ID from TapPay console
 VITE_TAPPAY_APP_KEY=       # secret API key paired with the ID
 VITE_APPLE_MERCHANT_ID=    # Apple Pay merchant identifier (e.g., merchant.com.example)
 VITE_GOOGLE_MERCHANT_ID=   # Google Pay merchant ID
+VITE_ENABLE_GOOGLE_PAY=    # 'true' (default) to show Google Pay, set to 'false' to hide it
 VITE_TAPPAY_ENV=           # 'production' (default) or 'sandbox' for TPDirect.setupSDK
 VITE_PAYMENT_API_URL=      # backend payment endpoint (defaults to https://confgive.thehope.app/api/payment)
 ```

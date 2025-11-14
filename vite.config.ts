@@ -12,6 +12,7 @@ export default defineConfig({
         VITE_TAPPAY_APP_ID: '',
         VITE_APPLE_MERCHANT_ID: '',
         VITE_GOOGLE_MERCHANT_ID: '',
+        VITE_ENABLE_GOOGLE_PAY: 'true',
         VITE_TAPPAY_ENV: 'production',
         VITE_PAYMENT_API_URL: 'https://confgive.thehope.app/api/payment',
       },

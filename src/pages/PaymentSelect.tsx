@@ -4,15 +4,19 @@ import { UseFormRegister } from "react-hook-form";
 interface PaymentSelectProps {
     register: UseFormRegister<any>;
     selectedPayment: string;
+    showGooglePay: boolean;
 }
 
 
 const PaymentSelect: React.FC<PaymentSelectProps> = (props) => {
-    const { register, selectedPayment } = props;
+    const { register, selectedPayment, showGooglePay } = props;
     const paymentOptions = [
         { label: "Apple Pay", value: "apple-pay" },
-        { label: "Google Pay", value: "google-pay" },
     ];
+
+    if (showGooglePay) {
+        paymentOptions.push({ label: "Google Pay", value: "google-pay" });
+    }
 
     return (
         <Select

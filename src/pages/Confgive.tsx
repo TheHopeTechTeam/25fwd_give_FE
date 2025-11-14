@@ -66,6 +66,8 @@ const CONFGive = () => {
     const [privacyPolicyDialogOpen, setPrivacyPolicyDialogOpen] = useState(false);
     const appleMerchantIdRef = useRef<string>(import.meta.env.VITE_APPLE_MERCHANT_ID || '');
     const googleMerchantIdRef = useRef<string>(import.meta.env.VITE_GOOGLE_MERCHANT_ID || '');
+    const googlePayFeatureEnabled = `${import.meta.env.VITE_ENABLE_GOOGLE_PAY ?? 'true'}`.toLowerCase() !== 'false';
+    const isGooglePayAvailable = Boolean(googleMerchantIdRef.current) && googlePayFeatureEnabled;
 
     const handleFocus = () => {
         setIsFocused(true);
@@ -83,7 +85,7 @@ const CONFGive = () => {
         const appleMerchantId = appleMerchantIdRef.current;
         const googleMerchantId = googleMerchantIdRef.current;
         const isApplePayConfigured = Boolean(appleMerchantId);
-        const isGooglePayConfigured = Boolean(googleMerchantId);
+        const isGooglePayConfigured = Boolean(googleMerchantId) && googlePayFeatureEnabled;
         const rawTapPayEnv = (import.meta.env.VITE_TAPPAY_ENV || '').toLowerCase();
         const tappayEnv: 'production' | 'sandbox' = rawTapPayEnv === 'sandbox' ? 'sandbox' : 'production';
         const paymentApiUrl = import.meta.env.VITE_PAYMENT_API_URL || 'http://localhost:3000/api/payment';
@@ -122,7 +124,11 @@ const CONFGive = () => {
             }
             TPDirect.googlePay.setupGooglePay(googlePaySetting);
         } else {
-            console.warn("Google Pay merchant identifier is missing. Google Pay will be disabled until it is configured.");
+            if (!googlePayFeatureEnabled && googleMerchantId) {
+                console.warn("Google Pay is disabled via VITE_ENABLE_GOOGLE_PAY.");
+            } else {
+                console.warn("Google Pay merchant identifier is missing. Google Pay will be disabled until it is configured.");
+            }
         }
         const ua = navigator.userAgent.toLowerCase();
         const android = ua.includes("android");
@@ -241,7 +247,7 @@ const CONFGive = () => {
             if (button) {
                 button.innerHTML = "";
                 TPDirect.paymentRequestApi.setupTappayPaymentButton("#apple-pay-button-container", (getPrimeResult: any) => {
-                    postPay(getPrimeResult.prime, getPrimeResult.card.lastfour);
+                    postPay(getPrimeResult.prime);
                 });
             };
         }, 100);
@@ -249,9 +255,13 @@ const CONFGive = () => {
 
 
     const setupGooglePay = () => {
-        setIsGooglePayReady(true);
+        if (!googlePayFeatureEnabled || !googleMerchantIdRef.current) {
+            setIsGooglePayReady(false);
+            handleOpenAlert("Google Pay 暫時無法使用，請改用其他付款方式", "Google Pay is temporarily unavailable. Please choose another payment method.");
+            return;
+        }
 
-        let lastfour = '';
+        setIsGooglePayReady(true);
 
         const paymentRequest = {
             allowedNetworks: ["AMEX", "JCB", "MASTERCARD", "VISA"],
@@ -268,7 +278,7 @@ const CONFGive = () => {
                         handleOpenAlert("此裝置不支援 Google Pay", "This device does not support Google Pay");
                         return;
                     };
-                    postPay(prime, lastfour);
+                    postPay(prime);
                 });
             }
         });
@@ -305,13 +315,13 @@ const CONFGive = () => {
                     return;
                 };
                 // 傳送至後端 API
-                postPay(result.card.prime, result.card.lastfour);
+                postPay(result.card.prime);
             });
         };
     }
 
     // **傳送至後端 API**
-    const postPay = (prime: string, _lastFour: string) => {
+    const postPay = (prime: string) => {
         setLoading(true);
         console.log("✅ 付款中");
         const paymentApiUrl = import.meta.env.VITE_PAYMENT_API_URL;
@@ -370,7 +380,7 @@ const CONFGive = () => {
 
                 try {
                     return JSON.parse(responseText);
-                } catch (error) {
+                } catch {
                     throw new Error('Payment API returned invalid JSON.');
                 }
             })
@@ -599,7 +609,8 @@ const CONFGive = () => {
                                         errors={errors}></Upload>
                                     {selectedPayment && (
                                         <PaymentSelect register={register}
-                                            selectedPayment={selectedPayment}></PaymentSelect>
+                                            selectedPayment={selectedPayment}
+                                            showGooglePay={isGooglePayAvailable}></PaymentSelect>
                                     )}
                                     <CreditCard paymentType={watch("paymentType")}
                                         register={register}

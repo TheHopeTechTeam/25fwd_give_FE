@@ -35,7 +35,7 @@ const Receipt: React.FC<ReceiptProps> = (props) => {
             return 'Tax ID Number invalid\n統一編號格式錯誤';
         }
 
-        let logicProductArr = []
+        const logicProductArr: number[] = []
         let logicProduct = 0;
         // 通一編號倒數第二位為7時，乘積之和最後第二位數取0或1均可，其中之一和能被5整除，則符合統編邏輯
         if (value[6] == "7") {
@@ -61,7 +61,7 @@ const Receipt: React.FC<ReceiptProps> = (props) => {
             return true;
         }
 
-        return 'Tax ID Number invalid\統一編號格式錯誤';
+        return 'Tax ID Number invalid\n統一編號格式錯誤';
     }
 
 
