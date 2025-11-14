@@ -55,6 +55,12 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
         isCollapsed ? "title-collapsed" : ""
     ].filter(Boolean).join(" ");
 
+    // Respect iOS safe-area when the header is fixed on mobile Safari
+    const safeAreaTop = "env(safe-area-inset-top, 0px)";
+    const topOffset = isFormView
+        ? (isCollapsed ? `calc(${safeAreaTop} + ${COLLAPSED_TOP_OFFSET}px)` : safeAreaTop)
+        : 0;
+
     return (
         <div
             className={titleClasses}
@@ -62,7 +68,7 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
                 "--scroll-opacity": showFullBanner ? scrollOpacity : "0",
                 position: isFormView ? "fixed" : "relative",
                 height: `${displayedHeight}px`,
-                top: isCollapsed ? `${COLLAPSED_TOP_OFFSET}px` : 0,
+                top: topOffset,
                 width: isFormView ? (isCollapsed ? `${collapsedWidthPercent}%` : "100%") : "100%",
                 left: isCollapsed ? "50%" : 0,
                 transform: isCollapsed ? "translateX(-50%)" : "none",
