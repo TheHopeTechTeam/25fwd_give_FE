@@ -146,6 +146,10 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
         &::after {
             background: rgba(255, 255, 255, 0.15);
         }
+
+        .title-prelogo {
+            display: none;
+        }
     }
 
     &.title-dark {
@@ -213,6 +217,24 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
             top: 50%;
             width: 250px;
             transform: translate(-50%, -50%);
+        }
+    }
+
+    .title-prelogo {
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 64px);
+        text-align: center;
+        color: rgb(253, 241, 175);
+        font-size: 16px;
+        letter-spacing: 0.3px;
+        z-index: 3;
+        pointer-events: none;
+
+        @media #{$mobile} {
+            top: 28px;
         }
     }
 
@@ -958,6 +980,16 @@ $font-zh: 'Noto Sans TC', '微軟正黑體', sans-serif;
 
 .font-gotham-light {
     font-family: 'Gotham-Light', 'Roboto', sans-serif !important;
+}
+
+.font-gotham-black {
+    font-family: 'Gotham-Black', 'Roboto', sans-serif !important;
+    font-weight: 800;
+}
+
+.font-noto-bold {
+    font-family: 'Noto Sans TC', '微軟正黑體', sans-serif !important;
+    font-weight: 700;
 }
 
 .width100 {

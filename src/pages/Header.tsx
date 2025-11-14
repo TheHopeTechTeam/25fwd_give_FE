@@ -78,12 +78,18 @@ const Header = ({ titleHeight, setTitleHeight, giveStatus }: HeaderProps) => {
                 </>
             )}
             {isFormView && (
-                <img
-                    loading="lazy"
-                    src="/images/Logo.png"
-                    alt="FORWARD Restore"
-                    className={`title-logo ${showFullBanner ? "title-logo-floating" : "title-logo-compact"}`}
-                />
+                <>
+                    <p className="title-prelogo">
+                        <span className="font-gotham-black">FORWARD</span>
+                        <span className="font-noto-bold"> 年終系列講道</span>
+                    </p>
+                    <img
+                        loading="lazy"
+                        src="/images/Logo.png"
+                        alt="FORWARD Restore"
+                        className={`title-logo ${showFullBanner ? "title-logo-floating" : "title-logo-compact"}`}
+                    />
+                </>
             )}
             {showFullBanner && (
                 <>
